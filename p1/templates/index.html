@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -25,6 +24,7 @@
   <!-- Core theme CSS (includes Bootstrap)-->
   <link href="css/styles.css" rel="stylesheet" />
 </head>
+{% load static %}
 
 <body>
   <!-- Navigation-->
@@ -53,12 +53,16 @@
       </div>
       <div class="col-lg-2">
         {% if user.is_authenticated %}
-        <li class="nav-item"><a class="nav-link px-lg-4 py-1 py-lg-8"
-            href="{% url 'common:logout' %}">{{ user.username }} (로그아웃)</a>
+        <span class="nav-item"><a class="nav-link px-lg-4 py-1 py-lg-8"
+            href="{% url 'common:logout' %}">{{ user.username }} (로그아웃)<img src="{% static 'img\login.png' %}"
+              alt="login" height="40" width="40"></a>
           {% else %}
-        <li class="nav-item"><a class="nav-link px-lg-4 py-1 py-lg-8" href="{% url 'common:login' %}">로그인</a></li>
-        <li class="nav-item"><a class="nav-link px-lg-4 py-1 py-lg-8" href="{% url 'common:signup' %}">회원가입</a></li>
-        {% endif %}
+          <span class="nav-item"><a class="nav-link px-lg-4 py-1 py-lg-8"
+              href="{% url 'common:login' %}">로그인&nbsp;&nbsp;&nbsp;&nbsp;<img src="{% static 'img\logout.png' %}"
+                alt="login" height="40" width="40"></span></a>
+          <span class="nav-item"><a class="nav-link px-lg-4 py-1 py-lg-8" href="{% url 'common:signup' %}">회원가입<img
+                src="{% static 'img\login.png' %}" alt="signup" height="40" width="40"></span></a>
+          {% endif %}
       </div>
       </nav>
       <!-- ## -->
@@ -70,15 +74,6 @@
     <div class="container position-relative px-4 px-lg-5">
       <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
-          <div id="demo" class="carousel slide" data-ride="carousel">
-             <!-- Left and right controls -->
-             <a class="carousel-control-prev" href="#demo" data-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
-            </a>
-            <a class="carousel-control-next" href="#demo" data-slide="next">
-              <span class="carousel-control-next-icon"></span>
-            </a>
-          </div>
           <div class="site-heading">
             <h1>Built your city together at the hwasung</h1>
             <span class="subheading">SmartInside.</span>
@@ -90,9 +85,14 @@
   <!-- Main Content -->
   <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
-      <div class="col-md-10 col-lg-8 col-xl-7">
+      <div class="col-md-20 col-lg-18 col-xl-12">
         <!-- Post preview-->
         <div class="post-preview">
+
+
+
+
+
           <a href="post.html">
             <h2 class="post-title">Man must explore, and this is exploration at its greatest</h2>
             <h3 class="post-subtitle">Problems look mighty small from 150 miles up</h3>
@@ -147,13 +147,20 @@
             on July 8, 2021
           </p>
         </div>
+
         <!-- Divider-->
         <hr class="my-4" />
         <!-- Pager-->
-        <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts
-            →</a></div>
+
+        <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">더보기</a></div>
       </div>
+
     </div>
+
+  </div>
+
+
+  </div>
   </div>
   <!-- Footer-->
   <footer class="border-top">
@@ -191,9 +198,10 @@
       </div>
     </div>
   </footer>
-  <!-- Bootstrap core JS-->
+  <!-- Bootstrap core JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Core theme JS-->
-  <script src="js/scripts.js"></script>
+  <!-- <script src="js/scripts.js"></script> -->
 </body>
+
 </html>

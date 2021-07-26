@@ -9,3 +9,8 @@ class UserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ("username", "email")
+
+class WritingForm(writing):
+    class writingdata:
+        model = writing
+        fields = ("username", "writing")

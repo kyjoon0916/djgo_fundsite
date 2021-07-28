@@ -11,8 +11,8 @@ def board(request):
     return render(request, 'board.html')
 
 def writing_list(request):
-    writing_list = writing.objects.all().order_by(‘-created_date’)
-    paginator = Paginator(post_list, 10)
+    writing_list = Writing.objects.all().order_by(‘-created_date’)
+    paginator = Paginator(writing_list, 10)
     page = request.POST.get(‘page’)
 
     try:

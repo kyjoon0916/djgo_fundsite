@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'common',
+    'pybo',
 
 ]
 
@@ -140,13 +141,3 @@ LOGOUT_REDIRECT_URL = '/'
 SESSION_COOKIE_AGE = 900
 
 # 432000   24시간
-
-#summernote 필수 설정
-
-# X_FRAME_OPTIONS = 'SAMEORIGIN'
-
-# INSTALLED_APPS +=['django_summernote']
-
-# import os 
-# MEDIA_URL= '/media'
-# MEDIA_ROOT =os.path.join(BASE_DIR, 'media/')

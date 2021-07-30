@@ -1,9 +1,50 @@
+<!-- ################### -->
+{% extends 'base.html' %}
+{% block pagetitle %}SmartInside{% endblock %}
+{% block javascript %}
+  <script>
+    var infinite = new Waypoint.Infinite({
+      element: $('.infinite-container')[0],
+      onBeforePageLoad: function () {
+        $('.loading').show();
+      },
+      onAfterPageLoad: function ($items) {
+        $('.loading').hide();
+      }
+    });
+  </script>
+{% endblock %}
 {% load static %}
-{% for i in writing %}
-    <div class="col-4">
+{% block content %}
+<div class="infinite-container">
+  {% for writing in writings %}
+    <div class="infinite-item">
+      <h3>{{ writing.title }}</h3>
+      <p>
+        <small>{{ writing.capital }} / {{ writing.date }}</small>
+      </p>
+      <p>{{ writing.body|truncatechars:100 }}</p>
+    </div>
+  {% empty %}
+    <div class="infinite-item">
+      <a href="{% url 'generate_fake_data' %}" style="color:#fff">Populate database</a>
+    </div>
+  {% endfor %}
+</div>
+
+<div class="loading" style="display: none;">
+  Loading...
+</div>
+
+{% if page_obj.has_next %}
+  <a class="infinite-more-link" href="?page={{ writings.next_page_number }}">More</a>
+{% endif %}
+{% endblock %}
+<!-- ############################### -->
+<!-- <div class="col-4">
         <div class="container">
             <div class="card" style="width:300px">
-                <img class="card-img-top" src="{% static 'img\{{writing.id}}.png' %}" alt="Card image" style="width:90%">
+                <img class="card-img-top" src="{% static 'img\industrial1.png' %}" alt="Card image" style="width:90%">
                 <div class="card-body">
                     <h4 class="card-title">도전</h4>
                     <p class="card-text">Some example text some example text. 
@@ -38,5 +79,4 @@
             </div>
         </div>
     </div>
-</div>
-{% endfor %}
+</div> -->

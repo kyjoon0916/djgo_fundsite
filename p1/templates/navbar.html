@@ -7,7 +7,6 @@
   <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.css' %}">
   <!-- pybo CSS -->
   <link rel="stylesheet" type="text/css" href="{% static 'pybo/style.css' %}">
-  
   <title>SmartInside</title>
 </head>
 <body>
@@ -27,6 +26,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
               <ul class="navbar-nav ms-auto py-4 py-lg-0">
+              
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="index.html">홈</a></li>
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">펀딩하기</a></li>
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="post.html">시민 제안</a></li>
@@ -38,11 +38,11 @@
       <div class="col-lg-2">
         {% if user.is_authenticated %}
         <span class="nav-item"><a class="nav-link px-lg-4 py-1 py-lg-8"
-            href="{% url 'common:logout' %}">{{ user.username }} (로그아웃)<img src="{% static 'img\login.png' %}"
+            href="{% url 'common:logout' %}">{{ user.username }} (로그아웃)<img src="{% static 'img\logout.png' %}"
               alt="login" height="40" width="40"></a>
           {% else %}
           <span class="nav-item"><a class="nav-link px-lg-4 py-1 py-lg-8"
-              href="{% url 'common:login' %}">로그인&nbsp;&nbsp;&nbsp;&nbsp;<img src="{% static 'img\logout.png' %}"
+              href="{% url 'common:login' %}">로그인&nbsp;&nbsp;&nbsp;&nbsp;<img src="{% static 'img\login.png' %}"
                 alt="login" height="40" width="40"></span></a>
           <span class="nav-item"><a class="nav-link px-lg-4 py-1 py-lg-8" href="{% url 'common:signup' %}">회원가입<img
                 src="{% static 'img\login.png' %}" alt="signup" height="40" width="40"></span></a>

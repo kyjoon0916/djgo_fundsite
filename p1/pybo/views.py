@@ -1,8 +1,11 @@
 from django.shortcuts import render
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+# from django.db import Writing
 # Create your views here.
 from django.http import HttpResponse
-
+from django.db import models
+from .models import Writing
+from django.views.generic.list import ListView
 
 def index(request):
     return render(request, 'index.html')
@@ -10,14 +13,24 @@ def index(request):
 def board(request):
     return render(request, 'board.html')
 
-def writing_list(request):
-    writing_list = Writing.objects.all().order_by(‘-created_date’)
-    paginator = Paginator(writing_list, 10)
-    page = request.POST.get(‘page’)
-
+def home(request):
+    numbers_list = range(1, 1000)
+    page = request.GET.get('page', 1)
+    paginator = Paginator(numbers_list, 20)
     try:
-        post_list = paginator.page(page)
+        numbers = paginator.page(page)
     except PageNotAnInteger:
-        post_list = paginator.page(1)
+        numbers = paginator.page(1)
     except EmptyPage:
-        post_list = paginator.page(paginator.num_pages)
+        numbers = paginator.page(paginator.num_pages)
+    return render(request, 'post.html', {'numbers': numbers})
+class Writingview(ListView):
+    model = Writing
+    paginate_by = 5
+    context_object_name = 'writings'
+    template_name = 'post.html'
+
+def generate_fake_data(request):
+    from model_mommy import mommy
+    mommy.make('post.writing', _quantity=20)
+    return redirect('post')

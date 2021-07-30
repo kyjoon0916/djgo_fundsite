@@ -4,7 +4,7 @@ from django.template import RequestContext
 from django.views.decorators.csrf import csrf_protect
 from common.forms import UserForm
 from django.http import HttpResponse
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def index(request):
     return render(request, 'index.html')
@@ -18,9 +18,9 @@ def signup(request):
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data.get('user')
+            email = form.cleaned_data.get('email')
             raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
+            user = authenticate(email=email, password=raw_password)
             login(request, user)
             return redirect('/')
     else:

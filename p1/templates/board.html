@@ -2,14 +2,27 @@
 {% load static %}
 <div class="row mt-12">
     <div class="col-12 mb-4">
-        <div class="container">
-            <button type="button" class="btn btn-info">#건설</button>
-            <button type="button" class="btn btn-info">#전화</button>
-            <button type="button" class="btn btn-info">#Info</button>
-            <button type="button" class="btn btn-info">#Info</button>
-            <button type="button" class="btn btn-info">#Info</button>
-            <button type="button" class="btn btn-info">#Info</button>
+        <div class="dropdown">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                정렬순서
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">최신순</a>
+                <a class="dropdown-item" href="#">펀딩수</a>
+                <a class="dropdown-item" href="#">Link 3</a>
+            </div>
         </div>
     </div>
-    {% include "list.html" %}
+</div>
+<div class="col-12 mb-4">
+    <div class="container">
+        <button type="button" class="btn btn-info">#건설</button>
+        <button type="button" class="btn btn-info">#안전</button>
+        <button type="button" class="btn btn-info">#3</button>
+        <button type="button" class="btn btn-info">#4</button>
+        <button type="button" class="btn btn-info">#Info</button>
+        <button type="button" class="btn btn-info">#Info</button>
+    </div>
+</div>
+{% include "post.html" %}
 </div>

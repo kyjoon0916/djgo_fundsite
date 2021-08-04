@@ -1,5 +1,7 @@
 <!-- ################### -->
 {% extends 'base.html' %}
+{% load static %}
+
 {% block pagetitle %}SmartInside{% endblock %}
 {% block javascript %}
   <script>
@@ -14,14 +16,13 @@
     });
   </script>
 {% endblock %}
-{% load static %}
 {% block content %}
 <div class="infinite-container">
   {% for writing in writings %}
     <div class="infinite-item">
       <h3>{{ writing.title }}</h3>
       <p>
-        <small>{{ writing.capital }} / {{ writing.date }}</small>
+        <small>{{ writing.capital }} / {{ writing.pub_date }}</small>
       </p>
       <p>{{ writing.body|truncatechars:100 }}</p>
     </div>
@@ -32,21 +33,25 @@
       <div class="infinite-item">
         <h3>{{ writing.title }}</h3>
         <p>
-          <small>{{ writing.tag }} / {{ article.hits }}</small>
+          <small>{{ writing.tag }} / {{ writing.hits }}</small>
         </p>
-        <p>{{ article.body|truncatechars:100 }}</p>
+        <p>{{ writing.body|truncatechars:100 }}</p>
+      </div>
+      {% empty %}
+        <div class="infinite-item">
+          <a href="{% url 'generate_fake_data' %}" style="color:#fff">Populate database</a>
+        </div>
+      {% endfor %}
     </div>
-  {% endfor %}
-</div>
 
 <div class="loading" style="display: none;">
   Loading...
 </div>
-
 {% if page_obj.has_next %}
   <a class="infinite-more-link" href="?page={{ writings.next_page_number }}">More</a>
 {% endif %}
 {% endblock %}
+
 <!-- ############################### -->
 <!-- <div class="col-4">
         <div class="container">

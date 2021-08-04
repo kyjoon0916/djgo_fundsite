@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # from django.db import Writing
 # Create your views here.
@@ -17,7 +17,7 @@ def board(request):
     return render(request, 'board.html')
 
 
-def post(request):
+def home(request):
     numbers_list = range(1, 1000)
     page = request.GET.get('page', 1)
     paginator = Paginator(numbers_list, 20)
@@ -27,7 +27,7 @@ def post(request):
         numbers = paginator.page(1)
     except EmptyPage:
         numbers = paginator.page(paginator.num_pages)
-    return render(request, 'post.html', {'numbers': numbers})
+    return render(request, 'home.html', {'numbers': numbers})
 
 class Writingview(ListView):
     model = Writing
@@ -38,4 +38,4 @@ class Writingview(ListView):
 def generate_fake_data(request):
     from model_mommy import mommy
     mommy.make('writing', _quantity=20)
-    return redirect('plost')
+    return redirect('post')

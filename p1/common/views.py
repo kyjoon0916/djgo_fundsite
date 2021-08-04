@@ -6,6 +6,7 @@ from common.forms import UserForm
 from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+
 def index(request):
     return render(request, 'index.html')
 
@@ -22,12 +23,10 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(email=email, password=raw_password)
             login(request, user)
-            return redirect('/')
+            return redirect('index')
     else:
         form = UserForm()
     return render(request, 'common/signup.html', {'form': form})
-
-
 
 def bad_request_page(request, exception):
     response = render_to_response('error/error_400_page.html', {},

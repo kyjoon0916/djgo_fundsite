@@ -26,8 +26,15 @@
       <p>{{ writing.body|truncatechars:100 }}</p>
     </div>
   {% empty %}
+  {% endfor %}
     <div class="infinite-item">
-      <a href="{% url 'generate_fake_data' %}" style="color:#fff">Populate database</a>
+    {% for writing in writings %}
+      <div class="infinite-item">
+        <h3>{{ writing.title }}</h3>
+        <p>
+          <small>{{ writing.tag }} / {{ article.hits }}</small>
+        </p>
+        <p>{{ article.body|truncatechars:100 }}</p>
     </div>
   {% endfor %}
 </div>

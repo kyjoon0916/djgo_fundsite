@@ -13,7 +13,7 @@ def index(request):
 def board(request):
     return render(request, 'board.html')
 
-def home(request):
+def post(request):
     numbers_list = range(1, 1000)
     page = request.GET.get('page', 1)
     paginator = Paginator(numbers_list, 20)
@@ -24,13 +24,9 @@ def home(request):
     except EmptyPage:
         numbers = paginator.page(paginator.num_pages)
     return render(request, 'post.html', {'numbers': numbers})
+
 class Writingview(ListView):
     model = Writing
     paginate_by = 5
     context_object_name = 'writings'
     template_name = 'post.html'
-
-def generate_fake_data(request):
-    from model_mommy import mommy
-    mommy.make('post.writing', _quantity=20)
-    return redirect('post')

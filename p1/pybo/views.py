@@ -9,9 +9,13 @@ from django.views.generic.list import ListView
 
 def index(request):
     return render(request, 'index.html')
+    
+def about(request):
+    return render(request, 'about.html')
 
 def board(request):
     return render(request, 'board.html')
+
 
 def post(request):
     numbers_list = range(1, 1000)
@@ -30,3 +34,8 @@ class Writingview(ListView):
     paginate_by = 5
     context_object_name = 'writings'
     template_name = 'post.html'
+
+def generate_fake_data(request):
+    from model_mommy import mommy
+    mommy.make('writing', _quantity=20)
+    return redirect('plost')

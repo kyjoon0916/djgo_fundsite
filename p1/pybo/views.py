@@ -27,15 +27,11 @@ def home(request):
         numbers = paginator.page(1)
     except EmptyPage:
         numbers = paginator.page(paginator.num_pages)
-    return render(request, 'home.html', {'numbers': numbers})
+    return render(request, 'pybo/writings.html', {'numbers': numbers})
 
 class Writingview(ListView):
     model = Writing
     paginate_by = 5
     context_object_name = 'writings'
-    template_name = 'post.html'
-
-def generate_fake_data(request):
-    from model_mommy import mommy
-    mommy.make('writing', _quantity=20)
-    return redirect('post')
+    template_name = 'writings.html'
+    ordering = ['pub_date']

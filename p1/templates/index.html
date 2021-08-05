@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -26,22 +27,17 @@
 </head>
 {% load static %}
 {% include "navbar.html" %}
+
 <body>
-    <!-- ## -->
-  </div>
-  </div>
+  <!-- ## -->
   <!-- ## -->
   <!-- Page Header-->
-  <header class="masthead" style="background-image: url('img/city-bg.jpg')">
+  <header class="masthead" style="background-image" src="{% static 'img/main page_image.png' %)">
     <div class="container position-relative px-4 px-lg-5">
       <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
-          <div class="site-heading">
-            <h1>Build your city together at the hwasung</h1>
-          </div>
-        </div>
-      </div>
-    </div>
+          <div class="site-heading" src="{% static 'img/main_page_image.png' %}">
+
   </header>
   <!-- Main Content -->
   <div class="container px-4 px-lg-5">
@@ -51,16 +47,50 @@
         <!-- Divider-->
         <!-- Post preview-->
         <!-- Divider-->
+        <hr class="my-4" />
+        <!-- Pager-->
+
+        <footer class="border-top">
+          <div class="container px-4 px-lg-5">
+            <span h6>주소: 경기도 수원시 장안구 서부로 2066, 산학협력센터 85201호<br> 운영기관:(주)스마트인사이드AI<br>연락처:031-290-7533</span>
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+              <div class="col-md-10 col-lg-8 col-xl-7">
+                <ul class="list-inline text-center">
+                  <li class="list-inline-item">
+                    <a href="#!">
+                      <span class="fa-stack fa-lg">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                      </span>
+                    </a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="#!">
+                      <span class="fa-stack fa-lg">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                      </span>
+                    </a>
+                  </li>
+                  <li class="list-inline-item">
+                    <a href="#!">
+                      <span class="fa-stack fa-lg">
+                        <i class="fas fa-circle fa-stack-2x"></i>
+                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                      </span>
+                    </a>
+                  </li>
+                </ul>
+                <div class="small text-center text-muted fst-italic">Copyright &copy; SmartInside 2021</div>
+              </div>
+            </div>
+          </div>
       </div>
-    </div>
-    <hr class="my-4"/>
-    <!-- Pager-->
-  </div>
-  </div>
-  {% include "footer.html" %}
-  <!-- Bootstrap core JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Core theme JS-->
-  <!-- <script src="js/scripts.js"></script> -->
+      </footer>
+      <!-- Bootstrap core JS -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+      <!-- Core theme JS-->
+      <!-- <script src="js/scripts.js"></script> -->
 </body>
+
 </html>

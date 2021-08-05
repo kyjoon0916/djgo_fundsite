@@ -7,9 +7,10 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.css' %}">
   <!-- pybo CSS -->
-  <link rel="stylesheet" type="text/css" href="{% static 'pybo/style.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
   <title>스마트시티 리빙랩</title>
 </head>
+
 <body>
   <!-- Navigation-->
   <!-- 수정 -->
@@ -18,12 +19,12 @@
       <div class="col-lg-12">
         <!-- 수정 -->
         <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
-          <a class="navbar-brand" href="/">화성시 새솔동 스마트 타운</a>
+          <a class="navbar-brand" href="/"><img src="{% static 'img/main page_high bar.jpg' %}" allign="center"></a>
         </nav>
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-10">
+      <div class="col-lg-9">
         <div class="container px-4 px-lg-5"><button class="navbar-toggler" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -38,20 +39,20 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-2">
-      {% if user.is_authenticated %}
-      <span class="nav-item"><a class="nav-link px-lg-1 py-1 py-lg-0"
-          href="{% url 'common:logout' %}">{{ user.username }} (로그아웃)<img src="{% static 'img\logout.png' %}"
-            alt="login" height="40" width="40"></a>
-        {% else %}
+      <div class="col-lg-3">
+        {% if user.is_authenticated %}
         <span class="nav-item"><a class="nav-link px-lg-1 py-1 py-lg-0"
-            href="{% url 'common:login' %}">로그인&nbsp;&nbsp;&nbsp;&nbsp;<img src="{% static 'img\login.png' %}"
-              alt="login" height="40" width="40"></span></a>
-        <span class="nav-item"><a class="nav-link px-lg-1 py-1 py-lg-2" href="{% url 'common:signup' %}">회원가입<img
-              src="{% static 'img\login.png' %}" alt="signup" height="40" width="40"></span></a>
-        {% endif %}
+            href="{% url 'common:logout' %}">{{ user.username }} (로그아웃)<img src="{% static 'img\main page_middle bar_icon001.png' %}"
+              alt="login" height="40" width="40"></a>
+          {% else %}
+          <span class="nav-item"><a class="nav-link px-lg-1 py-1 py-lg-0"
+              href="{% url 'common:login' %}">로그인&nbsp;&nbsp;&nbsp;&nbsp;<img src="{% static 'img\main page_middle bar_icon001.png' %}"
+                alt="login" height="40" width="40"></span></a>
+          <span class="nav-item"><a class="nav-link px-lg-1 py-1 py-lg-2" href="{% url 'common:signup' %}">회원가입<img
+                src="{% static 'img\main page_middle bar_icon002.png' %}" alt="signup" height="40" width="40"></span></a>
+          {% endif %}
+      </div>
+      </nav>
+      <!-- ## -->
     </div>
-    </nav>
-    <!-- ## -->
-  </div>
   </div>

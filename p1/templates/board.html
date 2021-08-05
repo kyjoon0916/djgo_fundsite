@@ -29,7 +29,6 @@
 <div class="row mt-12">
     <div class="col-10 mb-4">
         <div class="col-10 mb-4"><img src="{% static 'img/main page_subhead.png' %}"></div>
-
     </div>
 </div>
 <div class="col-12 mb-4">
@@ -41,16 +40,17 @@
         <button type="button" class="btn btn-info"><img src="{% static 'img/main page_icon005.png' %}"></button>
         <button type="button" class="btn btn-info"><img src="{% static 'img/main page_icon006.png' %}"></button>
     </div>
-</div>
-<div class="dropdown">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-        정렬
-    </button>
-    <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">최신순</a>
-        <a class="dropdown-item" href="#">펀딩수</a>
-    </div>
+    <div class="col-12">
+        <div class="dropdown">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                정렬
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">최신순</a>
+                <a class="dropdown-item" href="#">펀딩수</a>
+                <a class="dropdown-item" href="#">조회수</a>
 
-</div>
-{% include "writings.html" %}
+            </div>
+        </div>
+    </div>
 </div>

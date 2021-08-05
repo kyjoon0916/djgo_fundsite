@@ -1,5 +1,4 @@
 {% load static %}
-
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -19,37 +18,32 @@
       <div class="col-lg-12">
         <!-- 수정 -->
         <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
-          <a class="navbar-brand" href="/"><img src="{% static 'img/main page_high bar.jpg' %}" allign="center"></a>
+          <a class="navbar-brand" href="/"><img src="{% static 'img/main page_high bar.jpg' %}"></a>
         </nav>
       </div>
     </div>
     <div class="row">
-      <div class="col-lg-9">
-        <div class="container px-4 px-lg-5"><button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-            aria-label="Toggle navigation">
-            Menu
-            <i class="fas fa-bars"></i>
+      <div class="col">
+        <div class="container-fluid">
           </button>
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ms-auto py-4 py-lg-0">
-              <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">아이디어펀딩</a></li>
-              <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">스마트시티리빙랩이란?</a></li>
+            <ul class="navbar-nav">
+              <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html"><img src="{% static 'img\idea funding_blue.png' %}"></a></li>
+              <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html"><img src="{% static 'img\smartcity livinglab.png' %}"></a></li>
             </ul>
           </div>
         </div>
-      </div>
-      <div class="col-lg-3">
+      
+      <div class="col-1">
         {% if user.is_authenticated %}
-        <span class="nav-item"><a class="nav-link px-lg-1 py-1 py-lg-0"
+        <span class="nav-item"><a class="nav-link"
             href="{% url 'common:logout' %}">{{ user.username }} (로그아웃)<img src="{% static 'img\main page_middle bar_icon001.png' %}"
               alt="login" height="40" width="40"></a>
           {% else %}
-          <span class="nav-item"><a class="nav-link px-lg-1 py-1 py-lg-0"
-              href="{% url 'common:login' %}">로그인&nbsp;&nbsp;&nbsp;&nbsp;<img src="{% static 'img\main page_middle bar_icon001.png' %}"
+          <span class="nav-item"><a class="nav-link"
+              href="{% url 'common:login' %}">&nbsp;&nbsp;&nbsp;&nbsp;<img src="{% static 'img\login re.png' %}"
                 alt="login" height="40" width="40"></span></a>
-          <span class="nav-item"><a class="nav-link px-lg-1 py-1 py-lg-2" href="{% url 'common:signup' %}">회원가입<img
-                src="{% static 'img\main page_middle bar_icon002.png' %}" alt="signup" height="40" width="40"></span></a>
+          <span class="nav-item"><a class="nav-link" href="{% url 'common:signup' %}"><img
+                src="{% static 'img\join re.png' %}" alt="signup" height="40" width="40"></span></a>
           {% endif %}
       </div>
       </nav>

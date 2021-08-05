@@ -4,6 +4,7 @@ from django.template import RequestContext
 from django.views.decorators.csrf import csrf_protect
 from common.forms import UserForm
 from django.http import HttpResponse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def index(request):
@@ -18,16 +19,16 @@ def signup(request):
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data.get('user')
+            email = form.cleaned_data.get('email')
             raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('/')
+            # user = authenticate(email=email, password=raw_password)
+            user = form.save()
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            #login(request, user)
+            return redirect('index')
     else:
         form = UserForm()
     return render(request, 'common/signup.html', {'form': form})
-
-
 
 def bad_request_page(request, exception):
     response = render_to_response('error/error_400_page.html', {},

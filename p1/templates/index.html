@@ -45,6 +45,32 @@
       <div class="col-xs-24 col-lg-24 col-xl-24">
         {% include "board.html" %}
         <!-- Divider-->
+        <div class="container">
+          <div class="row infinite-container">
+              {% for writing in writings %}
+                  <div class="col-md-4 infinite-item">
+                      <div class="card mb-4 shadow-sm">
+                          <img class="img-thumbnail"  src="{% static 'img/{{writing.id}}.png'}"/>
+                          <div class="card-body">
+                              <h5>{{writing.title}}</h5>
+                              <p class="card-text">
+                                  {{writing.contents|truncatewords:20}}
+                              </p>
+                          </div>
+                      </div>
+                  </div>
+              {% endfor %}
+          </div>
+          {% if writings.has_next %}
+          <a class="infinite-more-link" href="?page={{ writings.next_page_number }}">more</a>
+          {% endif %}
+          <div class="d-flex justify-content-center" style="display: none;">
+              <div class="spinner-border" role="status">
+                  <span class="sr-only">Loading...</span>
+              </div>
+          </div>
+      </div>
+        <!-- Divider-->
         <!-- Post preview-->
         <!-- Divider-->
         <hr class="my-4" />
@@ -89,6 +115,29 @@
       </footer>
       <!-- Bootstrap core JS -->
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+      
+<script src="/static/js/jquery-3.3.1.min.js"></script>
+<script src="/static/js/jquery.waypoints.min.js"></script>
+<script src="/static/js/infinite.min.js"></script>
+<script>
+
+var infinite = new Waypoint.Infinite({
+element: $('.infinite-container')[0],
+handler: function(direction) {
+
+},
+offset: 'bottom-in-view',
+
+onBeforePageLoad: function () {
+$('.spinner-border');
+},
+onAfterPageLoad: function () {
+$('.spinner-border').hide();
+}
+
+});
+
+</script>
       <!-- Core theme JS-->
       <!-- <script src="js/scripts.js"></script> -->
 </body>

@@ -5,7 +5,7 @@
         {% for writing in writings %}
             <div class="col-md-4 infinite-item">
                 <div class="card mb-4 shadow-sm">
-                    <img class="img-thumbnail"  src="{% static img/{{writing.id}}.png'}"/>
+                    <img class="img-thumbnail"  src="{% static 'img/{{writing.id}}.png'}"/>
                     <div class="card-body">
                         <h5>{{writing.title}}</h5>
                         <p class="card-text">
@@ -31,6 +31,7 @@
 <script src="/static/js/jquery.waypoints.min.js"></script>
 <script src="/static/js/infinite.min.js"></script>
 <script>
+
 var infinite = new Waypoint.Infinite({
 element: $('.infinite-container')[0],
 handler: function(direction) {
@@ -39,7 +40,7 @@ handler: function(direction) {
 offset: 'bottom-in-view',
 
 onBeforePageLoad: function () {
-$('.spinner-border').show();
+$('.spinner-border');
 },
 onAfterPageLoad: function () {
 $('.spinner-border').hide();

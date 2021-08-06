@@ -10,13 +10,8 @@ from django.views.generic.list import ListView
 class Writingview(ListView):
     
     paginate_by = 5
-<<<<<<< HEAD
-=======
-    
-    
-    
->>>>>>> b0ad6330c318eed2278df2b5b571c5b8b465af2f
 def index(request):
+    
     writing_list = Writing.objects.order_by('pub_date')
     page = request.GET.get('page', 1)
     paginator = Paginator(writing_list, 3)
@@ -42,8 +37,4 @@ def home(request):
         numbers = paginator.page(1)
     except EmptyPage:
         numbers = paginator.page(paginator.num_pages)
-<<<<<<< HEAD
     return render(request, 'pybo/writings.html', {'numbers': numbers})
-=======
-    return render(request, 'pybo/writings.html', {'numbers': numbers})
->>>>>>> b0ad6330c318eed2278df2b5b571c5b8b465af2f

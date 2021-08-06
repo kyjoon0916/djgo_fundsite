@@ -27,6 +27,7 @@
 </head>
 {% load static %}
 {% include "navbar.html" %}
+
 <body>
   <!-- ## -->
   <!-- ## -->
@@ -35,7 +36,7 @@
     <div class="container position-relative px-4 px-lg-5">
       <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
-          <div class="site-heading" src="{% static 'img/main_page_image.png' %}">
+          <div class="site-heading"><img src="{% static 'img/main_page_image.png' %}">
   </header>
   <!-- Main Content -->
   <div class="container px-4 px-lg-5">
@@ -45,17 +46,10 @@
         <!-- Divider-->
         <div class="container">
           <div class="row infinite-container">
-<<<<<<< HEAD
             {% for writing in writings %}
             <div class="col-md-4 infinite-item">
               <div class="card mb-4 shadow-sm">
                 <img class="img-thumbnail" src="{% static 'img/{{writing.id}}.png'}"/>
-=======
-              {% for writing in writings %}
-                  <div class="col-md-4 infinite-item">
-                      <div class="card mb-4 shadow-sm">
-                          <img class="img-thumbnail"  src="{% static 'img/{{writing.id}}.png'}"/>
->>>>>>> b0ad6330c318eed2278df2b5b571c5b8b465af2f
                           <div class="card-body">
                               <h5>{{writing.title}}</h5>
                               <p class="card-text">
@@ -67,7 +61,6 @@
               {% endfor %}
           </div>
           {% if writings.has_next %}
-<<<<<<< HEAD
           <a class=" infinite-more-link" href="?page={{ writings.next_page_number }}">more</a>
                 {% endif %}
                 <div class="d-flex justify-content-center" style="display: none;">
@@ -75,54 +68,6 @@
                     <span class="sr-only">Loading...</span>
                   </div>
                 </div>
-=======
-          <a class="infinite-more-link" href="?page={{ writings.next_page_number }}">more</a>
-          {% endif %}
-          <div class="d-flex justify-content-center" style="display: none;">
-              <div class="spinner-border" role="status">
-                  <span class="sr-only">Loading...</span>
-              </div>
-          </div>
-      </div>
-        <!-- Divider-->
-        <!-- Post preview-->
-        <!-- Divider-->
-        <hr class="my-4" />
-        <!-- Pager-->
-
-        <footer class="border-top">
-          <div class="container px-4 px-lg-5">
-            <span h6>주소: 경기도 수원시 장안구 서부로 2066, 산학협력센터 85201호<br> 운영기관:(주)스마트인사이드AI<br>연락처:031-290-7533</span>
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-              <div class="col-md-10 col-lg-8 col-xl-7">
-                <ul class="list-inline text-center">
-                  <li class="list-inline-item">
-                    <a href="#!">
-                      <span class="fa-stack fa-lg">
-                        <i class="fas fa-circle fa-stack-2x"></i>
-                        <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                      </span>
-                    </a>
-                  </li>
-                  <li class="list-inline-item">
-                    <a href="#!">
-                      <span class="fa-stack fa-lg">
-                        <i class="fas fa-circle fa-stack-2x"></i>
-                        <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
-                      </span>
-                    </a>
-                  </li>
-                  <li class="list-inline-item">
-                    <a href="#!">
-                      <span class="fa-stack fa-lg">
-                        <i class="fas fa-circle fa-stack-2x"></i>
-                        <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                      </span>
-                    </a>
-                  </li>
-                </ul>
-                <div class="small text-center text-muted fst-italic">Copyright &copy; SmartInside 2021</div>
->>>>>>> b0ad6330c318eed2278df2b5b571c5b8b465af2f
               </div>
               <!-- Divider-->
               <!-- Post preview-->
@@ -130,8 +75,63 @@
               <hr class="my-4" />
               <!-- Pager-->
               <footer class="border-top">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                  정책 - 약관
+                </button>
+
+                <!-- The Modal -->
+                <div class="modal fade" id="myModal">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+
+                      <!-- Modal Header -->
+                      <div class="modal-header">
+                        <h4 class="modal-title">정책 - 약관</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      </div>
+
+                      <!-- Modal body -->
+                      <div class="modal-body">
+                        Modal body..
+                      </div>
+
+                      <!-- Modal footer -->
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                  개인정보 처리방침
+                </button>
+
+                <!-- The Modal -->
+                <div class="modal fade" id="myModal">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+
+                      <!-- Modal Header -->
+                      <div class="modal-header">
+                        <h4 class="modal-title">개인정보d 처리방침</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      </div>
+
+                      <!-- Modal body -->
+                      <div class="modal-body">
+                        Modal body..
+                      </div>
+
+                      <!-- Modal footer -->
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div class="container px-4 px-lg-5">
-                  <span h6>주소: 경기도 수원시 장안구 서부로 2066, 산학협력센터 85201호<br> 운영기관:(주)스마트인사이드AI<br>연락처:031-290-7533</span>
+                  <span h6>주소: 경기도 수원시 장안구 서부로 2066, 산학협력센터 85201호<br>
+                    운영기관:(주)스마트인사이드AI<br>연락처:031-290-7533</span>
                   <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                       <ul class="list-inline text-center">
@@ -165,7 +165,6 @@
                   </div>
                 </div>
             </div>
-<<<<<<< HEAD
             </footer>
             <!-- Bootstrap core JS -->
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -192,38 +191,6 @@
             </script>
             <!-- Core theme JS-->
             <!-- <script src="js/scripts.js"></script> -->
-=======
-          </div>
-      </div>
-      </footer>
-      <!-- Bootstrap core JS -->
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-      
-<script src="/static/js/jquery-3.3.1.min.js"></script>
-<script src="/static/js/jquery.waypoints.min.js"></script>
-<script src="/static/js/infinite.min.js"></script>
-<script>
-
-var infinite = new Waypoint.Infinite({
-element: $('.infinite-container')[0],
-handler: function(direction) {
-
-},
-offset: 'bottom-in-view',
-
-onBeforePageLoad: function () {
-$('.spinner-border');
-},
-onAfterPageLoad: function () {
-$('.spinner-border').hide();
-}
-
-});
-
-</script>
-      <!-- Core theme JS-->
-      <!-- <script src="js/scripts.js"></script> -->
->>>>>>> b0ad6330c318eed2278df2b5b571c5b8b465af2f
 </body>
 
 </html>

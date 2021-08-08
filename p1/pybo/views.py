@@ -10,10 +10,8 @@ from django.views.generic.list import ListView
 class Writingview(ListView):
     
     paginate_by = 5
-    
-    
-    
 def index(request):
+    
     writing_list = Writing.objects.order_by('pub_date')
     page = request.GET.get('page', 1)
     paginator = Paginator(writing_list, 3)

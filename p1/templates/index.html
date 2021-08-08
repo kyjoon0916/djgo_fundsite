@@ -23,7 +23,6 @@
     href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
     rel="stylesheet" type="text/css" />
   <!-- Core theme CSS (includes Bootstrap)-->
-  <link href="css/styles.css" rel="stylesheet" />
 </head>
 {% load static %}
 {% include "navbar.html" %}
@@ -33,10 +32,6 @@
   <!-- ## -->
   <!-- Page Header-->
   <header class="masthead"><img src="{% static 'img/main page_image.png' %}">
-    <div class="container position-relative px-4 px-lg-5">
-      <div class="row gx-4 gx-lg-5 justify-content-center">
-        <div class="col-md-10 col-lg-8 col-xl-7">
-          <div class="site-heading"><img src="{% static 'img/main_page_image.png' %}">
   </header>
   <!-- Main Content -->
   <div class="container px-4 px-lg-5">
@@ -53,15 +48,16 @@
                           <div class="card-body">
                               <h5>{{writing.title}}</h5>
                               <p class="card-text">
-                                  {{writing.contents|truncatewords:20}}
+                                  {{writing.contents|truncatewords:20}}                                 
                               </p>
-                          </div>
-                      </div>
-                  </div>
-              {% endfor %}
+                              </div>
+            </div>
           </div>
-          {% if writings.has_next %}
-          <a class=" infinite-more-link" href="?page={{ writings.next_page_number }}">more</a>
+        </div>
+        {% endfor %}
+      </div>
+      {% if writings.has_next %}
+      <a class=" infinite-more-link" href="?page={{ writings.next_page_number }}">more</a>
                 {% endif %}
                 <div class="d-flex justify-content-center" style="display: none;">
                   <div class="spinner-border" role="status">
@@ -78,23 +74,19 @@
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
                   정책 - 약관
                 </button>
-
                 <!-- The Modal -->
                 <div class="modal fade" id="myModal">
                   <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
-
                       <!-- Modal Header -->
                       <div class="modal-header">
                         <h4 class="modal-title">정책 - 약관</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                       </div>
-
                       <!-- Modal body -->
                       <div class="modal-body">
                         Modal body..
                       </div>
-
                       <!-- Modal footer -->
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
@@ -102,18 +94,17 @@
                     </div>
                   </div>
                 </div>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">
                   개인정보 처리방침
                 </button>
-
                 <!-- The Modal -->
-                <div class="modal fade" id="myModal">
+                <div class="modal fade" id="myModal2">
                   <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
 
                       <!-- Modal Header -->
                       <div class="modal-header">
-                        <h4 class="modal-title">개인정보d 처리방침</h4>
+                        <h4 class="modal-title">개인정보 처리방침</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                       </div>
 

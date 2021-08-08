@@ -10,6 +10,9 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def index(request):
     return render(request, 'index.html')
 
+def about(request):
+    return render(request, 'about.html')
+
 @csrf_protect
 def signup(request):
     """

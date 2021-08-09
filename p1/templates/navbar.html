@@ -1,44 +1,61 @@
 {% load static %}
+<style>
+  #home {
+    font-size: 3rem; text-align:center;
+  }
+  #homespan{
+    border: 2 rem;
+  }
+  #home a{
+    border-radius: 3;
+  }
+  #sub1 {
+    color: rgb(38,38,38);
+    background-color: rgb(225,255,246);
+    font-size: 25pt;
+    font-family: '경기청년바탕';
+    padding: 12pt;
+    margin: 0pt  }
 
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.css' %}">
-  <!-- pybo CSS -->
-  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-  <title>스마트시티 리빙랩</title>
-</head>
+   
 
-<body>
-  <nav>
-    <!-- Navigation-->
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-lg-12">
-          <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
-            <a class="navbar-brand" href="/"><img src="{% static 'img/main page_high bar.jpg' %}"></a>
-          </nav>
-        </div>
-        <div class="container-fluid">
-          <div class="row">
-            <a class="nav-link" href="{% url 'about' %}"><img src="{% static 'img/idea funding_blue.png' %}"></a>
-            <a class="nav-link" href="se.html"><img src="{% static 'img/smartcity livinglab.png' %}"></a>
-            {% if user.is_authenticated %}
-            <span class="nav-item"><a class="nav-link" href="{% url 'common:logout' %}"><img
-                  src="{% static 'img/main page_middle bar_icon001.png' %}" alt="login" height="22"
-                  width="22">&nbsp;&nbsp;{{ user.username }} (로그아웃)</span>
-            {% else %}
-            <span class="nav-item"><a class="nav-link" href="{% url 'common:login' %}">&nbsp;&nbsp;&nbsp;&nbsp;<img
-                  src="{% static 'img/log-in re.png' %}" alt="login" height="25" width="60"></span></a>
-            <span class="nav-item"><a class="nav-link" href="{% url 'common:signup' %}"><img
-                  src="{% static 'img\join re.png' %}" alt="signup" height="25" width="75"></span></a>
-            {% endif %}
-          </div>
+  nav {
+      background-color: rgb(103, 214, 232); font-size:  3rem; text-align: center
+  }
+  nav a {
+    color:rgb(225,255,246)
+  }
+  span{
+    color:rgb(225,255,246)
+  }
+  #login
+  {
+    padding-right: 3%;
+    margin-right: 3%;
+  }
+</style>
+  <!-- Navigation-->
+  <div class="container-fluid">
+    <div class="row">
+        <nav class="navbar-expand">
+          <a class="navbar" href="/" id="home">화성시 새솔동 <span style="font-weight: bold">스마트타운</span></a><a style="font-size: 1rem; color:rgb(225,255,246); font-family: '경기청년바탕 Bold'; margin-top: 30pt"> HWASEONG SMART CITY</a>
+        </nav>
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+          <a class="nav-link" id="sub1" href="{% url 'about' %}">아이디어펀딩</a>
+          <a class="nav-link" href="se.html" id="sub1">스마트시티 리빙랩</a><a style="font-size: 25pt ; padding-left: 3pt; margin-left: 0pt;">이란?</a>
+          {% if user.is_authenticated %}
+          <span class="nav-item" id="login"><a class="nav-link" href="{% url 'common:logout' %}"><img
+                src="{% static 'img/main page_middle bar_icon001.png' %}" alt="login" height="22"
+                width="22">&nbsp;&nbsp;{{ user.username }} (로그아웃)</span>
+          {% else %}
+          <span class="nav-item"><a class="nav-link" href="{% url 'common:login' %}">&nbsp;&nbsp;&nbsp;&nbsp;<img
+                src="{% static 'img/log-in re.png' %}" alt="login" height="25" width="75"></span></a>
+          {% endif %}
+          <span class="nav-item"><a class="nav-link" href="{% url 'common:signup' %}"><img
+                src="{% static 'img\join re.png' %}" alt="signup" height="25" width="75"></span></a>
         </div>
       </div>
     </div>
-  </nav>
-  </body>
-</div>
+  </div>

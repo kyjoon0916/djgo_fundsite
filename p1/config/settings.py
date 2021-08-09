@@ -144,3 +144,7 @@ LOGOUT_REDIRECT_URL = '/'
 SESSION_COOKIE_AGE = 900
 
 # 432000   24시간
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'

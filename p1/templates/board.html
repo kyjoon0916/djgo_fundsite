@@ -24,58 +24,33 @@
         rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
-    {% load static %}
-    <div class="row mt-12">
-        <div class="col-12">
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">#</th>
-                        <th scope="col">#</th>
-                        <th scope="col">#</th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-        <div class="col-4">
-            <div class="container">
-                <div class="card" style="width:300px">
-                    <img class="card-img-top" src="{% static 'img\industrial1.png' %}" alt="Card image" style="width:90%">
-                    <div class="card-body">
-                        <h4 class="card-title">도전</h4>
-                        <p class="card-text">Some example text some example text. John Doe is an architect and engineer
-                        </p>
-                        <a href="#" class="btn btn-primary">See Profile</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-4">
-            <div class="container">
-                <div class="card" style="width:300px">
-                    <img class="card-img-top" src="{% static 'img\industrial2.png' %}" alt="Card image" style="width:90%">
-                    <div class="card-body">
-                        <h4 class="card-title">정신</h4>
-                        <p class="card-text">Some example text some example text.
-                        </p>
-                        <a href="#" class="btn btn-primary">See Profile</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+</head>
+{% load static %}
+<div class="row mt-12">
+    <div class="col-10 mb-4">
+        <div class="col-10 mb-4"><img src="{% static 'img/main page_subhead.png' %}"></div>
 
-        <div class="col-4">
+    </div>
+</div>
+<div class="col-12 mb-4">
+    <div class="container">
+        <button type="button" class="btn btn-info"><img src="{% static 'img/main page_icon001.png' %}"></button>
+        <button type="button" class="btn btn-info"><img src="{% static 'img/main page_icon002.png' %}"></button>
+        <button type="button" class="btn btn-info"><img src="{% static 'img/main page_icon003.png' %}"></button>
+        <button type="button" class="btn btn-info"><img src="{% static 'img/main page_icon004.png' %}"></button>
+        <button type="button" class="btn btn-info"><img src="{% static 'img/main page_icon005.png' %}"></button>
+        <button type="button" class="btn btn-info"><img src="{% static 'img/main page_icon006.png' %}"></button>
+    </div>
+</div>
+<div class="dropdown">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+        정렬
+    </button>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">최신순</a>
+        <a class="dropdown-item" href="#">펀딩수</a>
+    </div>
 
-            <div class="container">
-                <div class="card" style="width:300px">
-                    <img class="card-img-top" src="{% static 'img\bridge.png' %}" alt="Card image" style="width:90%">
-                    <div class="card-body">
-                        <h4 class="card-title">혁신</h4>
-                        <p class="card-text">Some example text some example text. John Doe is an architect and engineer
-                        </p>
-                        <a href="#" class="btn btn-primary">See Profile</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+</div>
+<!-- {% include "writings.html" %} -->
+</div>

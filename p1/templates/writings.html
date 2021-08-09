@@ -1,0 +1,51 @@
+
+{% load static %}
+<div class="container">
+    <div class="row infinite-container">
+        {% for writing in writings %}
+            <div class="col-md-4 infinite-item">
+                <div class="card mb-4 shadow-sm">
+                    <img class="img-thumbnail"  src="{% static 'img/{{writing.id}}.png'}"/>
+                    <div class="card-body">
+                        <h5>{{writing.title}}</h5>
+                        <p class="card-text">
+                            {{writing.description|truncatewords:20}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% if page_obj.has_next %}
+    <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}"></a>
+    {% endif %}
+    <div class="d-flex justify-content-center" style="display:none;">
+        <div class="spinner-border" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</div>
+
+
+<script src="/static/js/jquery-3.3.1.min.js"></script>
+<script src="/static/js/jquery.waypoints.min.js"></script>
+<script src="/static/js/infinite.min.js"></script>
+<script>
+
+var infinite = new Waypoint.Infinite({
+element: $('.infinite-container')[0],
+handler: function(direction) {
+
+},
+offset: 'bottom-in-view',
+
+onBeforePageLoad: function () {
+$('.spinner-border');
+},
+onAfterPageLoad: function () {
+$('.spinner-border').hide();
+}
+
+});
+
+</script>

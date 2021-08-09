@@ -20,6 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('common/', include('common.urls')),
     path('pybo/', include('pybo.urls')),
+    path('about/', views.about, name="about"),
     path('', views.index, name='index'),
     path('board/',views.board, name='board'),
 ]

@@ -34,13 +34,13 @@
     <!-- The slideshow -->
     <div class="carousel-inner" style="height: 24rem">
       <div class="carousel-item active">
-        <img src="{% static 'img/panorama-2117310 re.jpg' %}" alt="1">
+        <img class="img-slide" src="{% static 'img/panorama-2117310 re.jpg' %}" alt="1">
       </div>
       <div class="carousel-item">
-        <img src="{% static 'img/panorama-2117310 re.jpg' %}" alt="2">
+        <img class="img-slide" src="{% static 'img/panorama-2117310 rere.jpg' %}" alt="2">
       </div>
       <div class="carousel-item">
-        <img src="{% static 'img/panorama-2117310 re.jpg' %}" alt="3">
+        <img class="img-slide" src="{% static 'img/panorama-2117310 rerere.jpg' %}" alt="3">
       </div>
     </div>
     <!-- Left and right controls -->
@@ -60,12 +60,17 @@
       {% for writing in writings %}
       <div class="col-md-4 infinite-item">
         <div class="card mb-4 shadow-sm">
-          <img class="img-thumbnail" src="{% static 'img/{{writing.id}}.png'}"/>
-          <div class="card-body">
-            <h5>{{writing.title}}</h5>
-              <p class="card-text">
-                {{writing.contents|truncatewords:20}}                                 d
-              </p>
+          <div class="card-header no-bg post-tags" style="padding: 0.25rem;">
+            <sup>{{ writing.tag }}</sup>
+          </div>
+          <a href="{% url 'item_detail'  writing.id %}" style="text-decoration: none;">
+            <img class="img-thumbnail" src="static/img/{{ writing.img_file_name }}" style="border: none; height: 240px; min-width: 550px;"/>
+            <div class="card-body text-center" style="padding: 0.5rem;">
+              <h5 style="color: #262626; font-family: '나눔스퀘어Bold';">{{ writing.title }}</h5>
+            </div>
+          </a>
+          <div class="card-footer no-bg post-info" style="padding: 0.5rem">
+            <span>{{ writing.pub_date }}</span>
           </div>
         </div>
       </div>

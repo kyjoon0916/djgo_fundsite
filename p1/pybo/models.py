@@ -23,12 +23,13 @@ class Writing(models.Model):
     userid = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='작성자', db_column='writerid')
     tag = models.CharField(max_length=32,verbose_name='게시판종류')
     pub_date = models.DateTimeField('data published',default=datetime.now)
-    hits = models.PositiveIntegerField(default=0, verbose_name='조회수')
+    img_file_name = models.CharField(max_length=64,verbose_name='이미지파일')
     capital = models.PositiveIntegerField(default=0,verbose_name='펀딩금액')
     class Meta:
         db_table = 'writing'
         ordering = ['pub_date']
-            
+        verbose_name = '아이디어 펀딩'
+        verbose_name_plural = '아이디어 펀딩'    
     def __str__(self):
         return self.title
 

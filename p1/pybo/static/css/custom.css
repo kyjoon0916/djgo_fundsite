@@ -1,7 +1,10 @@
-.no-background {
+body {
+    background: #edf0f2;
+}
+.no-bg {
     border: none;
     background: none;
-    cursor: pointer;
+    /* cursor: pointer; */
     /* margin: 0;
     padding: 0; */
 }
@@ -20,4 +23,33 @@
 }
 .footer-condition {
     vertical-align: sub;
+}
+.post-info {
+    color: #828282;
+    /* margin-bottom: 10px; */
+}
+.post-tags sup {
+    background-color: #67E5C1;
+    /* border-radius: 3px; */
+    color: #ffffff;
+    display: inline-block;
+    font-size: 15px;
+    line-height: inherit;
+    padding: 0.25rem;
+    /* margin-left: 7px;
+    padding: 2px 5px; */
+    font-weight: normal;
+    top: 0.2em;
+}
+.card {
+    min-height: 380px;
+    min-width: 440px;
+}
+.img-slide {
+    width: 100%;
+    height: 100%;
+}
+.item-img-wrapper {
+    background-color: #ffffff;
+    
 }

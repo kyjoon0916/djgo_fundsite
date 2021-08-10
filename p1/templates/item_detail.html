@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <title>SmartInside</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+  <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+  <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+  <!-- Google fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+  <!-- Core theme CSS (includes Bootstrap)-->
+</head>
+{% include "navbar.html" %}
+<body>
+  <div class="container-fluid">
+    <div class="row" style="padding-top: 7rem;">
+      <div class="col-md-6">
+        <div class="col-md-offset-"
+        <div class="col-md-6 item-img-wrapper">
+          <img src="../../static/img/{{ writing.img_file_name }}" alt="" width="400pt" height="200pt">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="post-deatil-info">
+          <p>{{ writing.title }}</p>
+        </div>
+        <div class="item-info">
+          <p><b>{{ writing.capital }}</b>원 펀딩</p>
+          <p>현재<b>34</b>명의 서포트</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      
+    </div>
+  </div>
+</body>

@@ -1,61 +1,114 @@
 {% load static %}
-<style>
-  #home {
-    font-size: 3rem; text-align:center;
-  }
-  #homespan{
-    border: 2 rem;
-  }
-  #home a{
-    border-radius: 3;
-  }
-  #sub1 {
-    color: rgb(38,38,38);
-    background-color: rgb(225,255,246);
-    font-size: 25pt;
-    font-family: '경기청년바탕';
-    padding: 12pt;
-    margin: 0pt  }
-
-   
-
-  nav {
-      background-color: rgb(103, 214, 232); font-size:  3rem; text-align: center
-  }
-  nav a {
-    color:rgb(225,255,246)
-  }
-  span{
-    color:rgb(225,255,246)
-  }
-  #login
-  {
-    padding-right: 3%;
-    margin-right: 3%;
-  }
-</style>
-  <!-- Navigation-->
-  <div class="container-fluid">
-    <div class="row">
-        <nav class="navbar-expand">
-          <a class="navbar" href="/" id="home">화성시 새솔동 <span style="font-weight: bold">스마트타운</span></a><a style="font-size: 1rem; color:rgb(225,255,246); font-family: '경기청년바탕 Bold'; margin-top: 30pt"> HWASEONG SMART CITY</a>
-        </nav>
-      </div>
-      <div class="container-fluid">
-        <div class="row">
-          <a class="nav-link" id="sub1" href="{% url 'about' %}">아이디어펀딩</a>
-          <a class="nav-link" href="se.html" id="sub1">스마트시티 리빙랩</a><a style="font-size: 25pt ; padding-left: 3pt; margin-left: 0pt;">이란?</a>
-          {% if user.is_authenticated %}
-          <span class="nav-item" id="login"><a class="nav-link" href="{% url 'common:logout' %}"><img
-                src="{% static 'img/main page_middle bar_icon001.png' %}" alt="login" height="22"
-                width="22">&nbsp;&nbsp;{{ user.username }} (로그아웃)</span>
-          {% else %}
-          <span class="nav-item"><a class="nav-link" href="{% url 'common:login' %}">&nbsp;&nbsp;&nbsp;&nbsp;<img
-                src="{% static 'img/log-in re.png' %}" alt="login" height="25" width="75"></span></a>
-          {% endif %}
-          <span class="nav-item"><a class="nav-link" href="{% url 'common:signup' %}"><img
-                src="{% static 'img\join re.png' %}" alt="signup" height="25" width="75"></span></a>
+<!-- Navigation-->
+<div class="container-fluid ">
+  <div class="row nav-title">
+    <div class="col-lg-12 nav-title">
+      <a href="/" style="text-decoration: none;">
+        <div class="navbar-expand-lg navbar-light p-4" id="mainNav">
+          <p style="font-size: 25pt; margin-bottom: 0; font-family: '경기천년제목Light';">화성시 새솔동 <b
+              style="font-family: '경기천년제목Bold'">스마트타운</b></p>
+          <span style="font-size: 20pt; font-family: '나눔스퀘어Bold'; text-align: center;">HWASEONG SMART CITY</span>
+          <!-- <a class="navbar-brand" href="/"><img src="{% static 'img/main page_high bar.jpg' %}"></a> -->
         </div>
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="d-flex col-md-6" style="font-size: 25pt;">
+      <a class="nav-link" href="{% url 'about' %}"><span style="color:#262626; font-family: '나눔스퀘어ExtraBold'">아이디어
+          펀딩</span></a>
+      <a class="nav-link" href="se.html"><span style="color:#3CB587; font-family: '나눔스퀘어Regula'">스마트시티 리빙랩</span><span
+          style="color:#262626">이란?</span><a>
+    </div>
+    <div class="d-flex col-md-6" style="font-size: 20pt; color: #515151 !important; justify-content: flex-end;">
+      {% if user.is_authenticated %}
+      <span class="nav-item"><a class="nav-link" href="{% url 'common:logout' %}"
+          style="color: inherit; font-family: '나눔스퀘어Regula';">
+          <img src="{% static 'img/main page_middle bar_icon001.png' %}">{{ user.username }} (로그아웃)</a></span>
+      {% else %}
+      <span class="nav-item"><a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal"
+          style="color: inherit; font-family: '나눔스퀘어Regula';">
+          <img src="{% static 'img/main page_middle bar_icon001.png' %}"> 로그인</a></span>
+
+      {% endif %}
+      <span class="nav-item"><a class="nav-link" href="#" data-toggle="modal" data-target="#signupModal"
+          style="color: inherit; font-family: '나눔스퀘어Regula';">
+          <img src="{% static 'img/main page_middle bar_icon002.png' %}"> 회원가입</a></span>
+    </div>
+  </div>
+  <!-- The Modal -->
+  <div class="modal fade" id="loginModal">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title"></h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          {% include "first.html" %}
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+
       </div>
     </div>
   </div>
+
+</div>
+
+<!-- The Modal -->
+<div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="signupModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog modal-xl">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">회원가입</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="container my-3">
+          <div class="row my-3">
+            <div class="col-4">
+              <h4>계정생성</h4>
+            </div>
+          </div>
+          <form method="post" class="post-form" action="{% url 'common:signup' %}">
+            {% csrf_token %}
+            {% include "form_errors.html" %}
+            <div class="form-group">
+              <label for="username">이름</label>
+              <input type="text" class="form-control" name="username" id="user" placeholder="아이디를 입력하시오."
+                value="{{ form.username.value|default_if_none:'' }}">
+            </div>
+            <div class="form-group">
+              <label for="email">이메일</label>
+              <input type="text" class="form-control" name="email" id="email" placeholder="이메일을 입력하시오."
+                value="{{ form.email.value|default_if_none:'' }}"><button type="submit" class="btn btn-primary" style="width:auto">이메일인증</button>
+              <div class="form-group">
+                <label for="password1">비밀번호</label>
+                <input type="password" class="form-control" name="password1" id="password1" placeholder="비밀번호를 입력하시오."
+                  value="{{ form.password1.value|default_if_none:'' }}">
+              </div>
+              <div class="form-group">
+                <label for="password2">비밀번호 확인</label>
+                <input type="password" class="form-control" name="password2" id="password2" placeholder="비밀번호를 입력하시오."
+                  value="{{ form.password2.value|default_if_none:'' }}">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:30%">완료</button>
+          </form>
+        </div>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

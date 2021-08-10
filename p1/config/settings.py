@@ -148,3 +148,14 @@ SESSION_COOKIE_AGE = 900
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
+
+EMAIL = {
+    'EMAIL_BACKEND' : 'django.core.mail.backends.smtp.EmailBackend',
+    'EMAIL_USE_TLS' : True,
+    "EMAIL_PORT" : 587,
+    'EMAIL_HOST' : 'smtp.gmail.com',
+    'EMAIL_HOST_USER' : 'kyjoon9429@gmail.com',
+    'EMAIL_HOST_PASSWORD' : '1q2w3e4r5t6y!',
+    'SERVER_EMAIL' : 'Gmail ID',
+    'REDIRECT_PAGE' : 'https:/'
+}

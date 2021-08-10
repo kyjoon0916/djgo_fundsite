@@ -1,0 +1,36 @@
+@font-face {
+    font-family: '경기천년제목Bold';
+    src: url('../font/경기천년제목_Bold.otf');
+}
+@font-face {
+    font-family: '나눔스퀘어Regula';
+    src: url('../font/경기천년바탕_Regular.otf');
+}
+@font-face {
+    font-family: '경기천년제목Medium';
+    src: url('../font/경기천년제목_Medium.otf');
+}
+@font-face {
+    font-family: '경기천년제목Light';
+    src: url('../font/경기천년제목_Light.otf');
+}
+@font-face {
+    font-family: '경기천년바탕Bold';
+    src: url('../font/경기천년바탕_Bold.otf');
+}
+@font-face {
+    font-family: '나눔스퀘어Bold';
+    src: url('../font/NanumSquareB.ttf');
+}
+@font-face {
+    font-family: '나눔스퀘어ExtraBold';
+    src: url('../font/NanumSquareEB.ttf');
+}
+@font-face {
+    font-family: '나눔스퀘어Light';
+    src: url('../font/NanumSquareL.ttf');
+}
+@font-face {
+    font-family: '나눔스퀘어Regula';
+    src: url('../font/NanumSquareR.ttf');
+}

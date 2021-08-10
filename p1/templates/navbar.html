@@ -1,44 +1,32 @@
 {% load static %}
-
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.css' %}">
-  <!-- pybo CSS -->
-  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-  <title>스마트시티 리빙랩</title>
-</head>
-
-<body>
-  <nav>
-    <!-- Navigation-->
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-lg-12">
-          <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
-            <a class="navbar-brand" href="/"><img src="{% static 'img/main page_high bar.jpg' %}"></a>
-          </nav>
+<!-- Navigation-->
+<div class="container-fluid ">
+  <div class="row nav-title">
+    <div class="col-lg-12 nav-title">
+      <a href="/" style="text-decoration: none;">
+        <div class="navbar-expand-lg navbar-light p-4" id="mainNav">
+          <p style="margin-bottom: 0; font-family: '경기천년제목Light';">화성시 새솔동 <b style="font-family: '경기천년제목Bold'">스마트타운</b></p>
+          <span style="font-size: 20pt; font-family: '나눔스퀘어Bold';">HWASEONG SMART CITY</span>
+        <!-- <a class="navbar-brand" href="/"><img src="{% static 'img/main page_high bar.jpg' %}"></a> -->
         </div>
-        <div class="container-fluid">
-          <div class="row">
-            <a class="nav-link" href="{% url 'about' %}"><img src="{% static 'img/idea funding_blue.png' %}"></a>
-            <a class="nav-link" href="se.html"><img src="{% static 'img/smartcity livinglab.png' %}"></a>
-            {% if user.is_authenticated %}
-            <span class="nav-item"><a class="nav-link" href="{% url 'common:logout' %}"><img
-                  src="{% static 'img/main page_middle bar_icon001.png' %}" alt="login" height="22"
-                  width="22">&nbsp;&nbsp;{{ user.username }} (로그아웃)</span>
-            {% else %}
-            <span class="nav-item"><a class="nav-link" href="{% url 'common:login' %}">&nbsp;&nbsp;&nbsp;&nbsp;<img
-                  src="{% static 'img/log-in re.png' %}" alt="login" height="25" width="60"></span></a>
-            <span class="nav-item"><a class="nav-link" href="{% url 'common:signup' %}"><img
-                  src="{% static 'img\join re.png' %}" alt="signup" height="25" width="75"></span></a>
-            {% endif %}
-          </div>
-        </div>
+      </a>
+    </div>
+  </div>
+    <div class="row">
+      <div class="d-flex col-md-6" style="font-size: 25pt;">
+        <a class="nav-link" href="{% url 'about' %}"><span style="color:#262626; font-family: '나눔스퀘어ExtraBold'">아이디어 펀딩</span></a>
+        <a class="nav-link" href="se.html"><span style="color:#3CB587; font-family: '나눔스퀘어Regula'">스마트시티 리빙랩</span><span style="color:#262626">이란?</span><a>
+      </div>
+      <div class="d-flex col-md-6"  style="font-size: 20pt; color: #515151 !important; justify-content: flex-end;">
+        {% if user.is_authenticated %}
+        <span class="nav-item"><a class="nav-link" href="{% url 'common:logout' %}" style="color: inherit; font-family: '나눔스퀘어Regula';">
+          <img src="{% static 'img/main page_middle bar_icon001.png' %}">{{ user.username }} (로그아웃)</a></span>
+        {% else %}
+        <span class="nav-item"><a class="nav-link" href="{% url 'common:login' %}" style="color: inherit; font-family: '나눔스퀘어Regula';">
+          <img src="{% static 'img/main page_middle bar_icon001.png' %}"> 로그인</a></span>
+        {% endif %}
+        <span class="nav-item"><a class="nav-link" href="{% url 'common:signup' %}" style="color: inherit; font-family: '나눔스퀘어Regula';">
+          <img src="{% static 'img/main page_middle bar_icon002.png' %}"> 회원가입</a></span>
       </div>
     </div>
-  </nav>
-  </body>
 </div>

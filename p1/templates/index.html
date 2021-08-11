@@ -55,16 +55,16 @@
   <!-- Board -->
   {% include "board.html" %}
   <!-- Divider-->
-  <div class="container" style="max-width: 1750px!important;"">
+  <div class="container" style="max-width: 1750px!important;">
     <div class="row infinite-container">
       {% for writing in writings %}
       <div class="col-md-4 infinite-item">
         <div class="card mb-4 shadow-sm">
           <img class="img-thumbnail" src="{% static 'img/{{writing.id}}.png'}"/>
           <div class="card-body">
-            <h5>{{writing.title}}</h5>
+            <a href="{% url 'about_detail' writings.0.id %}"><h5>{{writing.title}}</h5></a>
               <p class="card-text">
-                {{writing.contents|truncatewords:20}}                                 d
+                {{writing.contents|truncatewords:20}}                                 
               </p>
           </div>
         </div>

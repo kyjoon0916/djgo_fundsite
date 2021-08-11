@@ -15,39 +15,111 @@
   <link rel="stylesheet" href="{% static 'css/custom.css' %}">
   <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
   <!-- Google fonts-->
-  <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet"
+    type="text/css" />
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+    rel="stylesheet" type="text/css" />
   <!-- Core theme CSS (includes Bootstrap)-->
 </head>
 {% include "navbar.html" %}
+
 <body>
   <div class="container">
     <div class="row">
       <div class="col-6">
         <!-- Indicators -->
         <!-- The slideshow -->
-        <img src="../static/img/1.png" alt="1" width="500erm" height="300erm">
+        <img src="../static/img/1.png" alt="1" width="100%" height="70%">
       </div>
       <div class="col-6">
         <p>{{writing.title}}</p>
-        <p style="font-size: 3rem;">새솔동 공원 문화 조성</p>
-        <div class="progress" style="width: 394pt;" >
+        <p style="font-size: 300%;">새솔동 공원 문화 조성</p>
+        <div class="progress" style="width: 100%;">
           <div class="progress-bar" style="width:8rem; background-color: rgb(60,181,135);">펀딩 목표</div>
         </div>
-        <span class="badge badge-secondary" style="background-color: rgb(60,181,135); inline-size: 8rem; block-size: 2rem; font-size: 1rem;margin-top: 6pt;padding-top: 1.5%;">생활</span>
-        <span class="badge badge-secondary" style="background-color: rgb(60,181,135); inline-size: 8rem; block-size: 2rem; font-size: 1rem;margin-top: 6pt;padding-top: 1.5%">문화</span>
-        <span class="badge badge-secondary" style="background-color: rgb(60,181,135); inline-size: 8rem; block-size: 2rem; font-size: 1rem;margin-top: 6pt;padding-top: 1.5%">기타</span>
-        <span class="badge badge-secondary" style="background-color: rgb(60,181,135); inline-size: 8rem; block-size: 2rem; font-size: 1rem;margin-top: 6pt;padding-top: 1.5%">새솔동</span>
+        <span class="badge badge-secondary"
+          style="background-color: rgb(60,181,135); inline-size: 24.3%; block-size: 10%; font-size: 100%;margin-top: 6pt;padding-top: 1.5%;">생활</span>
+        <span class="badge badge-secondary"
+          style="background-color: rgb(60,181,135); inline-size: 24.3%; block-size: 10%; font-size: 100%;margin-top: 6pt;padding-top: 1.5%">문화</span>
+        <span class="badge badge-secondary"
+          style="background-color: rgb(60,181,135); inline-size: 24.3%; block-size: 10%; font-size: 100%;margin-top: 6pt;padding-top: 1.5%">기타</span>
+        <span class="badge badge-secondary"
+          style="background-color: rgb(60,181,135); inline-size: 24.3%; block-size: 10%; font-size: 100%;margin-top: 6pt;padding-top: 1.5%">{{writing.tag}}</span>
         <div class="row"><b>&nbsp;</b></div>
+        <b class="text" style="font-size: 100%;">
+          <strong style="font-size: 200%;"> 342,000</strong>원 펀딩</b>
         <div class="row"><b>&nbsp;</b></div>
-        <div class="row"><b>&nbsp;</b></div>
-        <div class="row"><b>&nbsp;</b></div>
-        <b class="text" style="font-size: 1rem;">342,000</b><a style="font-size: 1erm;">원 펀딩</a>
-        <button class="badge badge-secondary"  style="background-color: rgb(60,181,135);  inline-size: 8rem; block-size: 2rem; font-size: 1rem;margin-top: 6pt;padding-top: 1.5%" data-toggle="modal" data-target="#fundigModal">펀딩하기</button>
-
-    </div>
-    <div class="row">
-      <a >[소공원 문화공간과 콘텐츠 부족]</a>
+        <button class="badge badge-secondary"
+          style="background-color: rgb(60,181,135);  inline-size: 50%; block-size: 10%; font-size: 60%;margin-top: 6pt;padding-top: 1.5%"
+          data-toggle="modal" data-target="#fundingModal">펀딩하기</button>
+      </div>
     </div>
   </div>
+  <div class="modal fade" id="fundingModal">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">후원하기</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          {% if user.is_authenticated %}
+          <span>{{user.username}}</span>
+          <div class="form-group">
+            <label for="capital">후원 금액</label>
+            <input type="number" class="form-control" id="capital">
+          </div>
+          {% else %}
+          <div class="alert alert-Info">
+            <strong>회원정보 없음</strong><a href="/" class="alert-link">로그인</a><a> 이후에 시도하십시오.</a>
+          </div>
+          {% endif %}
+        </div>
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-secondary" data-dismiss="modal">후원</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row pt-5 my-3" >
+      <div class="col-1"></div>
+      <div class="col-10">
+        <div class="contatiner" style="background-color:#c7cdd1; width: 100%; border: 2pt solid beige;">
+          <p style="margin: 1%; ">{{writing.title}}</p>
+          <p>{{writing.pub_date}}</p>
+          <p>&nbsp;</p>
+          <div class="container">
+            <div class="row">
+              {{writing.contents}}
+            </div>
+          </div>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-1"></div>
+              <div class="col-10"  style="background-color: aliceblue; margin-bottom: 5%; border: beige solid;">
+                <p>dfsdf</p>
+                <p>dfsdf</p>
+                <p>dfsdf</p>
+                <p>dfsdf</p>
+                <p>dfsdf</p>
+                <p>dfsdf</p>
+                <p>dfsdf</p>
+                <p>dfsdf</p>
+                <div class="col-1"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-1"></div>
+  </div>
+  </div>
+  </div>
 </body>
+{% include "footer.html" %}

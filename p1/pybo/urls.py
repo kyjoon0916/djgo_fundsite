@@ -6,4 +6,6 @@ from django.conf import settings
 urlpatterns = [
     path('', views.index),
     path('about', views.about, name='about'),
+    path('about/<int:id>/', views.aboutDetail, name='about_detail'),
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

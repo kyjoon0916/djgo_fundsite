@@ -5,8 +5,35 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse
 from django.db import models
 from .models import Writing
+from django.shortcuts import render
 from django.views.generic.list import ListView
+from django.views import generic
 
+# class aboutDetail(generic.View):
+#     def __init__(self):
+#         self.template_name = "about.html"
+
+#     def get_queryset(self):
+#         results = Writing.objects.filter(id=self.kwargs['pk'])
+#         results = results.values('id','title')
+
+#         print("blogDetail results.query:", result.query)
+
+#         self.title_nm = results[0]['title']
+#         self.title_nm = results[0]['regist_dt']
+#         self.title_nm = results[0]['pb_detail__content_body'][:320]
+#         self.title_nm = results[0]['pb_detail__img_url']
+#         return results
+#     def get(self, request, *args, **kwargs):
+#         self.content = {"dataList":self.get_queryset(),
+#         "descript":self.descript,"titme_nm":self.title_nm,"ogImgUrl":self.ogImgUrl}
+
+#         return render(request, self.template_name, self.content)
+
+
+def aboutDetail(request, id):
+    writing = Writing.objects.get(pk=id)
+    return render(request, 'about.html', {'writing': writing,})
 
 def index(request):
     writing_list = Writing.objects.all().order_by('pub_date') 

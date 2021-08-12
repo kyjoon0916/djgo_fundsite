@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IPR LAB : 회원가입 정보입력</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+    <link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  </head>
+  <style>
+    @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+    body {
+    font-family: "Noto Sans KR", sans-serif !important;
+    letter-spacing: 0;
+    }
+    .btn-primary {
+    color: #fff;
+    background-color: #06bac5;
+    border-color: #06bac5;
+    }
+    .btn-primary:hover {
+    background-color: rgb(8, 175, 184);
+    border-color: rgb(8, 175, 184);
+    }
+    .bg-gradient-primary {
+      background-color: #f5f5f5;
+      font-size: .875rem;
+      line-height: 1.5;
+      /*color: #797979;*/
+      background-size: cover;
+    }
+    .input-deco {
+      padding: .45rem .9rem;
+      font-size: .875rem;
+    }
+    .ft-red {
+      color: red;
+    }
+    .al-center {
+      text-align: center;
+    }
+    .join-info-required {
+      color: #ee6a7b;
+    }
+    h1{
+        margin:0;
+        padding:0;
+        float:left;
+        padding-right:30px;
+    }
+    ol {
+        list-style-type: none;
+        padding:0;
+        
+    }
+    li{
+        list-style: none;
+        display: inline;
+        padding: 10px;
+        color: #939e9e;
+    }
+    .now {
+        text-decoration:overline;
+        color: #06BAC5;
+        font-weight: bold;
+    }
+    hr {
+        color: #39cfd8;
+    }
+    .container{
+        width: 600px;
+    }
+    .inputArea{
+      display: table;
+      width: 100%;
+    }
+    .inputArea .col {
+      display: table-cell;
+    }
+    .icon {
+      float: right;
+      padding-right: 13px;
+      margin-top: -27px;
+      cursor: pointer;
+      color: #95a2aa;
+      font-size: 18px;
+      font-weight: lighter;
+    }
+    .txt_guide {
+      color: #666;
+      font-size: 12px;
+      display: none;
+      line-height: 18px;
+    }
+    .txt_guide .txt {
+      font-size: 12px;
+      display: block;
+      line-height: 18px;
+    }
+    .txt:before {
+      content: '\2022';
+      padding: 0 6px 0 2px;
+      display: inline-block;
+      /*font-size: 12px;*/
+    }
+    .txt.bad {
+      color: #b3130b;
+    }
+    .txt.bad:before {
+      content: '\2715';
+      padding-right: 6px;
+      display: inline-block;
+    }
+    .txt.good {
+      color: #0f851a;
+    }
+    .txt.good:before {
+      content: '\2713';
+      padding: 0 5px 0 2px;
+      display: inline-block;
+      /*font-size: 12px;*/
+    }
+
+
+  </style>
+  <body class="bg-gradient-primary">
+    <div class = "my-5 pt-5">
+      <div class = "container">
+        <div class = "row justify-content-center">
+          <div class="col">
+              <div class = "text-center mb-4 mt-3">
+                <a href = "/application">
+                  {% load static %}
+                  <img style="width: 100px; " src="{% static 'application/아이피알랩로고.png' %}" alt="IPR LAB logo">
+                </a>
+              </div>
+          <!-- start card -->
+          <div class = "card">
+
+            <div class = "card-body">
+              <form class = "p-2" id="regist_frm" method="post" action="../register_result">
+                {% csrf_token %}
+                <div class="row">
+                <h1 class="pb-4">회원가입</h1>
+                <ol class="join_step">
+                  <li class="step1">1 이메일 주소</li>
+                  <li class="step2">2 이메일 주소 인증</li>
+                  <li class="step3 now">3 정보입력</li>
+                  <li class="step4">4 가입완료</li>
+                </ol>
+                </div>
+                <hr>
+                <div class = "mb-3">
+                  <label class="form-label" for = "emailaddress">이메일<span class = "join-info-required">*</span></label>
+                  <input class = "form-control input-deco mb-2" type = "email" id = "emailaddress" name="email" value= "{{email}}" readonly required>
+                </div>
+                <div class = "mb-3">
+                  <label class="form-label" for = "password">비밀번호<span class = "join-info-required">*</span></label>
+                  <div>
+                  <input class = "form-control input-deco pwcheck" type = "password" id = "pw" name="password" maxlength="12" required placeholder="비밀번호를 입력하십시오.">
+                  <span class="material-icons-outlined icon" id = "togglePassword1" data-text="visibility_off">visibility</span>
+                  </div>
+                  <p class = "txt_guide py-2 px-1" id = "password_guide">
+                    <span class="txt txt1" id = "pw_txt1">8~12자 입력</span>
+                    <span class="txt txt2" id = "pw_txt2">영문/숫자/특수문자 2개 이상조합</span>
+                  </p>
+                </div>
+                <div class = "mb-3">
+                  <label class="form-label" for = "conf_pw">비밀번호 재확인<span class = "join-info-required">*</span></label>
+                  <div>
+                  <input class = "form-control input-deco pwcheck" type = "password" id = "conf_pw" name="conf_pw" maxlength="12" required placeholder="비밀번호를 한번 더 입력하십시오.">
+                  <span class="material-icons-outlined icon" id = "togglePassword2" data-text="visibility_off">visibility</span>
+                  </div>
+                  <p class = "txt_guide py-2 px-1" id = "confirm_guide">
+                    <span class="txt txt1" id = "confirm_txt">동일한 비밀번호를 입력</span>
+                  </p>
+                </div>
+                <div class = "mb-3">
+                  <label class="form-label" for = "uName">이름<span class = "join-info-required">*</span></label>
+                  <input class = "form-control input-deco" type = "text" id = "uName" name="user_name" required placeholder="이름을 입력하십시오.">
+                </div>
+                <div class = "mb-3">
+                  <label class="form-label" for = "cName">기업명</label>
+                  <input class = "form-control input-deco" type = "text" id = "cName" name="company_name" placeholder="기업명을 입력하십시오.">
+                </div>
+                <div class = "mb-3">
+                  <label class="form-label" for = "phoneNum">전화번호</label>
+                  <input class = "form-control input-deco" type = "tel" id = "phoneNum" name="phone" maxlength="11" placeholder="숫자만 입력하십시오.">
+                </div>
+                
+                <!--<div class="ft-red al-center err-msg"></div>-->
+                <div class="py-4 text-center d-grid gap-2">
+                  <button class="btn btn-primary" type="button" onclick="frmCheck()">가입하기</button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+          <!-- end card -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Strat Modal -->
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">알림메세지</h5>
+            <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id = "modal-body">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary close">확인</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Modal -->
+  </body>
+</html>
+
+<script type="text/javascript">
+  // password 가이드
+  $("#pw").click(function(){
+    console.log("password input clicked");
+    $("#password_guide").css("display", "block")
+  });
+
+  $("#conf_pw").click(function(){
+    console.log("confirm password input clicked");
+    $("#confirm_guide").css("display", "block")
+  });
+
+  // password validation 및 재확인
+  // TODO backend에서도 유효성 검사 필요(?)
+  $(".pwcheck").on('input', function(){
+    console.log($(this).val());
+    // TODO --> 조건 수정/확인
+    // 영문/숫자/특수문자 2개 이상조합 8-12 자리
+    var pw = $("#pw").val();
+    var num = pw.search(/[0-9]/g);
+    var eng = pw.search(/[a-z]/ig);
+    var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+
+    if(pw.length < 8 || pw.length > 12){
+      $("#pw_txt1").removeClass('good')
+      $("#pw_txt1").addClass('bad')
+    }else{
+      $("#pw_txt1").removeClass('bad')
+      $("#pw_txt1").addClass('good')
+    }
+    if(pw.search(/\s/) != -1 && (num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0) ){
+      $("#pw_txt2").removeClass('good')
+      $("#pw_txt2").addClass('bad')
+    }else{
+      $("#pw_txt2").removeClass('bad')
+      $("#pw_txt2").addClass('good')
+    }
+    if($("#pw").val()!=$("#conf_pw").val() || $("#conf_pw").val().trim()==""){
+      $("#confirm_txt").removeClass('good')
+      $("#confirm_txt").addClass('bad')
+    }else{
+      $("#confirm_txt").removeClass('bad')
+      $("#confirm_txt").addClass('good')
+    }
+  });
+
+  // toggle password
+  $("#togglePassword1").click(function(){
+    var oldT = $(this).text();
+    var newT = $(this).data('text');
+    if($('#pw').attr('type') === "password"){
+      $('#pw').attr('type', 'text');
+    }else if($('#pw').attr('type') === "text"){
+      $('#pw').attr('type', 'password');
+    }
+    $(this).text(newT).data('text', oldT);
+    console.log("toggle1");
+  });
+
+  // toggle confirm password
+  $("#togglePassword2").click(function(){
+    var oldT = $(this).text();
+    var newT = $(this).data('text');
+    if($('#conf_pw').attr('type') === "password"){
+      $('#conf_pw').attr('type', 'text');
+    }else if($('#conf_pw').attr('type') === "text"){
+      $('#conf_pw').attr('type', 'password');
+    }
+    $(this).text(newT).data('text', oldT);
+    console.log("toggle2");
+  });
+
+  // input filter
+  (function($) {
+    $.fn.inputFilter = function(inputFilter) {
+      return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function() {
+        if (inputFilter(this.value)) {
+          this.oldValue = this.value;
+          this.oldSelectionStart = this.selectionStart;
+          this.oldSelectionEnd = this.selectionEnd;
+        } else if (this.hasOwnProperty("oldValue")) {
+          this.value = this.oldValue;
+          this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+        } else {
+          this.value = "";
+        }
+      });
+    };
+  }(jQuery));
+
+  // phone number validation (숫자만)
+  $(document).ready(function() {
+    $("#phoneNum").inputFilter(function(value) {
+      return /^\d*$/.test(value);
+    });
+  });
+
+  // error handling
+  function frmCheck(){
+    let flag = true;
+
+    $('input').each(function(){
+      if ($(this).attr('required') == 'required' && $(this).val() == '') {
+        $('#modal-body').text("필수 정보를 입력하십시오.")
+        $('#errorModal').modal('show');
+        flag = false;
+        $(this).focus();
+      }
+    })
+
+    if(flag) $("#regist_frm").submit();
+    else return flag;
+  }
+
+  // close modal
+  $(".close").on("click", function() {
+      $('#errorModal').modal('hide');
+  })
+</script>

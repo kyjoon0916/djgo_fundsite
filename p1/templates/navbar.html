@@ -3,31 +3,182 @@
 <div class="container-fluid ">
   <div class="row nav-title">
     <div class="col-lg-12 nav-title">
-      <a href="{% url 'index' %}" style="text-decoration: none;">
+      <a href="/" style="text-decoration: none;">
         <div class="navbar-expand-lg navbar-light p-4" id="mainNav">
-          <p style="margin-bottom: 0; font-family: '경기천년제목Light';">화성시 새솔동 <b style="font-family: '경기천년제목Bold'">스마트타운</b></p>
-          <span style="font-size: 20pt; font-family: '나눔스퀘어Bold';">HWASEONG SMART CITY</span>
-        <!-- <a class="navbar-brand" href="/"><img src="{% static 'img/main page_high bar.jpg' %}"></a> -->
+          <p style="font-size: 25pt; margin-bottom: 0; font-family: '경기천년제목Light';">화성시 새솔동 <b
+              style="font-family: '경기천년제목Bold'">스마트타운</b></p>
+          <span style="font-size: 20pt; font-family: '나눔스퀘어Bold'; text-align: center;">HWASEONG SMART CITY</span>
+          <!-- <a class="navbar-brand" href="/"><img src="{% static 'img/main page_high bar.jpg' %}"></a> -->
         </div>
       </a>
     </div>
   </div>
-    <div class="row">
-      <div class="d-flex col-md-6" style="font-size: 25pt;">
-        <a class="nav-link" href="{% url 'index' %}"><span style="color:#262626; font-family: '나눔스퀘어ExtraBold'">아이디어 펀딩</span></a>
-        <a class="nav-link" href="se.html"><span style="color:#3CB587; font-family: '나눔스퀘어Regula'">스마트시티 리빙랩</span><span style="color:#262626">이란?</span><a>
-          <!-- 스마트시티 리빌랩 설명페이지 추가예정 -->
-      </div>
-      <div class="d-flex col-md-6"  style="font-size: 20pt; color: #515151 !important; justify-content: flex-end;">
-        {% if user.is_authenticated %}
-        <span class="nav-item"><a class="nav-link" href="{% url 'common:logout' %}" style="color: inherit; font-family: '나눔스퀘어Regula';">
+  </div>
+  <div class="row">
+    <div class="d-flex col-md-6" style="font-size: 25pt;">
+      <a class="nav-link" href="{% url 'about' %}"><span style="color:#262626; font-family: '나눔스퀘어ExtraBold'">아이디어
+          펀딩</span></a>
+      <a class="nav-link" href="se.html"><span style="color:#3CB587; font-family: '나눔스퀘어Regula'">스마트시티 리빙랩</span><span
+          style="color:#262626">이란?</span><a>
+    </div>
+    <div class="d-flex col-md-6" style="font-size: 20pt; color: #515151 !important; justify-content: flex-end;">
+      {% if user.is_authenticated %}
+      <span class="nav-item"><a class="nav-link" href="{% url 'common:logout' %}"
+          style="color: inherit; font-family: '나눔스퀘어Regula';">
           <img src="{% static 'img/main page_middle bar_icon001.png' %}">{{ user.username }} (로그아웃)</a></span>
-        {% else %}
-        <span class="nav-item"><a class="nav-link" href="{% url 'common:login' %}" style="color: inherit; font-family: '나눔스퀘어Regula';">
+      {% else %}
+      <span class="nav-item"><a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal"
+          style="color: inherit; font-family: '나눔스퀘어Regula';">
           <img src="{% static 'img/main page_middle bar_icon001.png' %}"> 로그인</a></span>
-        {% endif %}
-        <span class="nav-item"><a class="nav-link" href="{% url 'common:signup' %}" style="color: inherit; font-family: '나눔스퀘어Regula';">
+
+      {% endif %}
+      <span class="nav-item"><a class="nav-link" href="#" data-toggle="modal" data-target="#signupModal"
+          style="color: inherit; font-family: '나눔스퀘어Regula';">
           <img src="{% static 'img/main page_middle bar_icon002.png' %}"> 회원가입</a></span>
+    </div>
+  </div>
+  <!-- The Modal -->
+  <div class="modal fade" id="loginModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header no-bg">
+          <button type="button" class="close" data-dismiss="modal"><img src="{% static 'img/x GUI_210809.png' %}" style="width: 80%"></button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="container my-4">
+            <div class="row">
+              <div class="col-md-10 offset-md-1"></a>
+                <form method="post" class="post-form" action="{% url 'common:login' %}">
+                  {% csrf_token %}
+                  <div class="text-center" style="margin-bottom:0; background-color: #FFFFFF !important;">
+                    <a class="navbar-brand" href="/">
+                      <h1><span style="color:black">로그인</span></h1>
+                    </a>
+                    <div class="form-horizontal" method="POST">
+                      {% csrf_token %}
+                      {% include "form_errors.html" %}
+                      <div class="login-form">
+                        <div class="login">
+                          <div class="col p-0"><b>아이디</b></div>
+                          <div class="input-group input-group-lg">
+                            <input type="text" class="form-control" id="username" name="username" placeholder="아이디를 입력하시오" value="">
+                          </div>
+                        </div>
+                        <div class="password">
+                          <div class="col p-0"><b>비밀번호</b></div>
+                          <div class="input-group input-group-lg">
+                            <input type="password" class="form-control" id="login-password" name="password" placeholder="비밀번호를 입력하시오" value="">
+                            <button class="btn no-bg" type="button" style="margin-left: -55px; z-index: 1000;">
+                              <img onmouseover="showPassword('login-password')" onmouseout="hidePassword('login-password')" src="{% static 'img/password_original size.png' %}"></button>
+                          </div>
+                        </div>
+                        <div class="login">
+                          <button type="submit" value="로그인" class="form-control btn btn-lg"
+                            style="background-color: rgb(103,214,232);color: #ffffff; border: 0;">로그인</button>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-12 text-center" style="font-weight: 500">
+                          <span><a href="{% url 'common:signup' %}" style="text-decoration: none; color: #212529;">회원가입</a></span>
+                          <span class="px-3">&#124;</span>
+                          <span>ID/PW 찾기</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal fade" id="signupModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header no-bg">
+        <button type="button" class="close" data-dismiss="modal"><img src="/static/img/x%20GUI_210809.png" style="width: 80%"></button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="container my-4">
+          <div class="row">
+            <div class="col-md-10 offset-md-1">
+              <form method="post" class="post-form" action="/common/login/">
+                <input type="hidden" name="csrfmiddlewaretoken" value="lpssrLJPLFo9R7icMCSctiRyLEZTOpUWiHck47Om6Yp6FAmpdwALnYVgSPCzC9Fl">
+                <div class="text-center" style="margin-bottom:0; background-color: #FFFFFF !important;">
+                  <a class="navbar-brand" href="/">
+                    <h1><span style="color:black">회원가입</span></h1>
+                  </a>
+                  <div class="form-horizontal" method="POST">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="lpssrLJPLFo9R7icMCSctiRyLEZTOpUWiHck47Om6Yp6FAmpdwALnYVgSPCzC9Fl">
+                    
+                    <div class="login-form">
+                      <div class="login">
+                        <div class="col p-0 mb-2"><b>아이디(이메일)</b></div>
+                        <div class="input-group input-group-lg">
+                          <input type="email" class="form-control" id="emailaddress" name="username" placeholder="아이디를 입력하시오" value="">
+                          <button class="btn btn-outline-secondary" type="button" onClick="checkEmail('{{ csrf_token }}')">이메일 인증코드 받기</button>
+                        </div>
+                      </div>
+                      <div class="password">
+                        <div class="col p-0 mb-2"><b>비밀번호</b></div>
+                        <div class="input-group input-group-lg">
+                          <input type="password" class="form-control pwcheck" id="signup-password-f" name="password" maxlength="12" placeholder="비밀번호를 입력하시오" value="">
+                          <button class="btn no-bg" type="button" style="margin-left: -55px; z-index: 1000;">
+                            <img onmouseover="showPassword('signup-password-f')" onmouseout="hidePassword('signup-password-f')" src="/static/img/password_original%20size.png"></button>
+                        </div>
+                        <p class = "txt_guide py-2 px-1" id="password_guide">
+                          <span class="txt txt1" id="pw_txt1">8~12자 입력</span>
+                          <span class="txt txt2" id="pw_txt2">영문/숫자/특수문자 2개 이상조합</span>
+                        </p>
+                      </div>
+                      <div class="password">
+                        <div class="col p-0 mb-2"><b>비밀번호 확인</b></div>
+                        <div class="input-group input-group-lg">
+                          <input type="password" class="form-control pwcheck" id="signup-password-s" name="password" maxlength="12" placeholder="비밀번호를 입력하시오" value="">
+                          <button class="btn no-bg" type="button" style="margin-left: -55px; z-index: 1000;">
+                            <img onmouseover="showPassword('signup-password-s')" onmouseout="hidePassword('signup-password-s')" src="/static/img/password_original%20size.png"></button>
+                        </div>
+                        <p class = "txt_guide py-2 px-1" id="confirm_guide">
+                          <span class="txt txt1" id="confirm_txt">동일한 비밀번호를 입력</span>
+                        </p>
+                      </div>
+                      <div class="terms-wrapper" style="margin: 20px;">
+                        <div class="form-check mb-2">
+                          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                          <label class="form-check-label" for="flexCheckDefault">
+                            <b>개인정보 이용약관 동의</b>
+                          </label>
+                        </div>
+                        <div class="terms">
+                          <h5>개인정보 수집 및 이용 동의</h5>
+                          아이디어 펀딩 플랫폼에서 처리하는 개인정보는 수집&#8729;이용 목적으로 명시한 범위내에서 처리하며, 개인정보보호법 및 관련 법령에서 정하는 보유기간을 준용하여
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        </div>
+                      </div>
+                      <div class="login">
+                        <button type="submit" value="로그인" class="form-control btn btn-lg" id="completeButton" style="background-color: rgb(103,214,232);color: #ffffff; border: 0;">완료</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

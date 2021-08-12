@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'common',
+    'account',
     'pybo',
 ]
 
@@ -141,5 +142,13 @@ LOGOUT_REDIRECT_URL = '/'
 # ---------------------------------------------------------------------------- #
 
 SESSION_COOKIE_AGE = 900
-
 # 432000   24시간
+
+# E-mail sending system setting (gmail)
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'k.seong84@gmail.com'
+EMAIL_HOST_PASSWORD ='gmpliabxciuewnex' # 앱 비밀번호
+EMAIL_PORT = 587        # 권장 gmail smtp포트 
+EMAIL_USE_TLS = True    #tls 보안
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

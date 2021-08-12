@@ -1,9 +1,9 @@
 body {
-    background: #edf0f2;
+    background: #edf0f2 !important;
 }
 .no-bg {
     border: none;
-    background: none;
+    background: none !important;
     /* cursor: pointer; */
     /* margin: 0;
     padding: 0; */
@@ -51,5 +51,58 @@ body {
 }
 .item-img-wrapper {
     background-color: #ffffff;
-    
+
+}
+.total {
+    margin-top: 20px;
+  }
+
+.login {
+margin: 20px;
+}
+
+.password {
+margin: 20px;
+}
+.login-form {
+    text-align: left;
+}
+.terms {
+    border: 1px solid #ced4da;
+    height: 100px;
+    overflow: scroll;
+}
+.txt_guide {
+    color: #666;
+    font-size: 12px;
+    display: none;
+    line-height: 18px;
+}
+.txt_guide .txt {
+font-size: 12px;
+display: block;
+line-height: 18px;
+}
+.txt:before {
+content: '\2022';
+padding: 0 6px 0 2px;
+display: inline-block;
+/*font-size: 12px;*/
+}
+.txt.bad {
+color: #b3130b;
+}
+.txt.bad:before {
+content: '\2715';
+padding-right: 6px;
+display: inline-block;
+}
+.txt.good {
+color: #0f851a;
+}
+.txt.good:before {
+content: '\2713';
+padding: 0 5px 0 2px;
+display: inline-block;
+/*font-size: 12px;*/
 }

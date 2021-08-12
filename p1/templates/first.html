@@ -1,72 +1,47 @@
 {% load static %}
 
-<html lang="ko">
-
-<head>
-
-  <title>Smart Inside</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-</head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<style>
-  .total {
-    margin-top: 20px;
-  }
-
-  .login {
-    margin: 20px;
-  }
-
-  .password {
-    margin: 20px;
-  }
-
-  .jumbotron {
-    background-color: #FFFFFF !important;
-  }
-</style>
-<body>
+<div class="container my-4">
   <div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
+    <div class="col-md-10 offset-md-1"></a>
       <form method="post" class="post-form" action="{% url 'common:login' %}">
         {% csrf_token %}
-        <div class="jumbotron text-center" style="margin-bottom:0">
+        <div class="text-center" style="margin-bottom:0; background-color: #FFFFFF !important;">
           <a class="navbar-brand" href="/">
-            <h1><span style="color:rgb(68,114,196)">S</span><span style="color:black">mart</span> <span
-                style="color:rgb(68,114,196)">I</span><span style="color:black">nside</span></h1>
+            <h1><span style="color:black">로그인</span></h1>
           </a>
-          <form class="form-horizontal" method="POST">
+          <div class="form-horizontal" method="POST">
             {% csrf_token %}
             {% include "form_errors.html" %}
-            <div class="total">
+            <div class="login-form">
               <div class="login">
-                <input type="text" class="form-control" id="username" name="username" placeholder="username"
-                  value="{{ form.username.value|default_if_none:'' }}">
+                <div class="col p-0"><b>아이디</b></div>
+                <div class="input-group input-group-lg">
+                  <input type="text" class="form-control" id="username" name="username" placeholder="아이디를 입력하시오" value="">
+                </div>
               </div>
               <div class="password">
-                <input type="password" class="form-control" id="password" name="password" placeholder="Password"
-                  value="{{ form.password.value|default_if_none:'' }}">
+                <div class="col p-0"><b>비밀번호</b></div>
+                <div class="input-group input-group-lg">
+                  <input type="password" class="form-control" id="password" name="password" placeholder="비밀번호를 입력하시오" value="">
+                  <button class="btn no-bg" type="button" id="button-addon2" style="margin-left: -55px; z-index: 1000;">
+                    <img onmouseover="showPassword()" onmouseout="hidePassword()" src="{% static 'img/password_original size.png' %}"></button>
+                </div>
               </div>
               <div class="login">
-                <button type="submit" value="로그인" class="form-control btn btn-primary">로그인</button>
+                <button type="submit" value="로그인" class="form-control btn btn-lg"
+                  style="background-color: rgb(103,214,232);color: #ffffff; border: 0;">로그인</button>
               </div>
             </div>
             <div class="row">
-              <div class="col-12 text-center">
-                <span><a href="{% url 'common:signup' %}">회원가입</a></span>
+              <div class="col-12 text-center" style="font-weight: 500">
+                <span><a href="{% url 'common:signup' %}" style="text-decoration: none; color: #212529;">회원가입</a></span>
+                <span class="px-3">&#124;</span>
+                <span>ID/PW 찾기</span>
               </div>
             </div>
-          </form>
+          </div>
         </div>
       </form>
     </div>
   </div>
-</body>
-</html>
+</div>

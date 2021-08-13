@@ -5,9 +5,11 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse
 from django.db import models
 from .models import Writing
+from .models import Funding
 from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views import generic
+from django.db.models import Sum
 
 # class aboutDetail(generic.View):
 #     def __init__(self):
@@ -29,7 +31,9 @@ from django.views import generic
 #         "descript":self.descript,"titme_nm":self.title_nm,"ogImgUrl":self.ogImgUrl}
 
 #         return render(request, self.template_name, self.content)
-
+def funding_update(request):
+    queryset = Funding.objects.all()
+    queryset.update(title='test title') # 일괄 update 요청
 
 def aboutDetail(request, id):
     writing = Writing.objects.get(pk=id)
@@ -41,14 +45,17 @@ def index(request):
     paginator = Paginator(writing_list, 3)
     writings = paginator.get_page(page)
     return render(request, 'index.html', {'writings': writings})
+
 def about(request):
     writing_list = Writing.objects.all().order_by('pub_date') 
     page = request.GET.get('page', 1)
     paginator = Paginator(writing_list, 3)
     writings = paginator.get_page(page)
     return render(request, 'about.html',{'writings': writings})
+    
 def board(request):
     return render(request, 'board.html')
+
 def home(request):
     numbers_list = range(1, 1000)
     page = request.GET.get('page', 1)
@@ -61,6 +68,9 @@ def home(request):
         numbers = paginator.page(paginator.num_pages)
     return render(request, 'pybo/writings.html', {'numbers': numbers})
 
+def funding_sum(request, id):
+    funding_sum = Funding.objects.filter(funding_id=id).aggregate(Sum('funding'))
+    return render(request, 'about.html',{"funding_sum" : funding_sum})
 
 # def post_like(request):
 #     post = get_object_or_404(Post, id=request.POST.get('post_id'))

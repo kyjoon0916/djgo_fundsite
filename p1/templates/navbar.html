@@ -50,7 +50,7 @@
           <div class="container my-4">
             <div class="row">
               <div class="col-md-10 offset-md-1"></a>
-                <form method="post" class="post-form" action="{% url 'common:login' %}">
+                <form method="post" class="post-form" action="{% url 'index' %}">
                   {% csrf_token %}
                   <div class="text-center" style="margin-bottom:0; background-color: #FFFFFF !important;">
                     <a class="navbar-brand" href="/">
@@ -111,22 +111,21 @@
         <div class="container my-4">
           <div class="row">
             <div class="col-md-10 offset-md-1">
-              <form method="post" class="post-form" action="/common/login/">
-                <input type="hidden" name="csrfmiddlewaretoken" value="lpssrLJPLFo9R7icMCSctiRyLEZTOpUWiHck47Om6Yp6FAmpdwALnYVgSPCzC9Fl">
+              <form method="post" class="post-form" id="regist_frm" action="{% url 'register_result' %}">
+                {% csrf_token %}
                 <div class="text-center" style="margin-bottom:0; background-color: #FFFFFF !important;">
                   <a class="navbar-brand" href="/">
                     <h1><span style="color:black">회원가입</span></h1>
                   </a>
                   <div class="form-horizontal" method="POST">
-                    <input type="hidden" name="csrfmiddlewaretoken" value="lpssrLJPLFo9R7icMCSctiRyLEZTOpUWiHck47Om6Yp6FAmpdwALnYVgSPCzC9Fl">
-                    
                     <div class="login-form">
                       <div class="login">
                         <div class="col p-0 mb-2"><b>아이디(이메일)</b></div>
                         <div class="input-group input-group-lg">
-                          <input type="email" class="form-control" id="emailaddress" name="username" placeholder="아이디를 입력하시오" value="">
+                          <input type="email" class="form-control" id="emailaddress" name="email" placeholder="아이디를 입력하시오" value="">
                           <button class="btn btn-outline-secondary" type="button" onClick="checkEmail('{{ csrf_token }}')">이메일 인증코드 받기</button>
                         </div>
+                        <div class="alert alert-success mt-2" role="alert" id="email_guide"></div>
                       </div>
                       <div class="password">
                         <div class="col p-0 mb-2"><b>비밀번호</b></div>
@@ -143,7 +142,7 @@
                       <div class="password">
                         <div class="col p-0 mb-2"><b>비밀번호 확인</b></div>
                         <div class="input-group input-group-lg">
-                          <input type="password" class="form-control pwcheck" id="signup-password-s" name="password" maxlength="12" placeholder="비밀번호를 입력하시오" value="">
+                          <input type="password" class="form-control pwcheck" id="signup-password-s" name="password-s" maxlength="12" placeholder="비밀번호를 입력하시오" value="">
                           <button class="btn no-bg" type="button" style="margin-left: -55px; z-index: 1000;">
                             <img onmouseover="showPassword('signup-password-s')" onmouseout="hidePassword('signup-password-s')" src="/static/img/password_original%20size.png"></button>
                         </div>
@@ -153,7 +152,7 @@
                       </div>
                       <div class="terms-wrapper" style="margin: 20px;">
                         <div class="form-check mb-2">
-                          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                          <input class="form-check-input" type="checkbox" value="" id="termCheckBox">
                           <label class="form-check-label" for="flexCheckDefault">
                             <b>개인정보 이용약관 동의</b>
                           </label>
@@ -169,7 +168,9 @@
                         </div>
                       </div>
                       <div class="login">
-                        <button type="submit" value="로그인" class="form-control btn btn-lg" id="completeButton" style="background-color: rgb(103,214,232);color: #ffffff; border: 0;">완료</button>
+                        <button type="button" value="로그인" class="form-control btn btn-lg" id="completeButton" onClick="frmCheck('{% url 'check_certification' %}', '{{ csrf_token }}')" style="background-color: rgb(103,214,232);color: #ffffff; border: 0;">
+                          완료
+                        </button>
                       </div>
                     </div>
                   </div>

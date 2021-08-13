@@ -8,6 +8,16 @@ from django.db import models
 from django.db.models.fields import EmailField
 
 
+class IntegerRangeField(models.IntegerField):
+    def __init__(self, verbose_name=None, name=None, min_value=None, max_value=None, **kwargs):
+        self.min_value, self.max_value = min_value, max_value
+        models.IntegerField.__init__(self, verbose_name, name, **kwargs)
+    def formfield(self, **kwargs):
+        defaults = {'min_value': self.min_value, 'max_value':self.max_value}
+        defaults.update(kwargs)
+        return super(IntegerRangeField, self).formfield(**defaults)
+
+
 class UserManager(BaseUserManager):
     def create_user(self, request, user_name=None, password=''):
         if not request.POST['email']:
@@ -25,7 +35,7 @@ class UserManager(BaseUserManager):
         return user
 
 
-    def create_superuser(self, user_name,  email, phone, password):
+    def create_superuser(self, user_name,  email, password):
         user = self.create_user(
             email=self.normalize_email(email),
             password=password
@@ -38,10 +48,15 @@ class UserManager(BaseUserManager):
     def update_user(self, request):
         user = get_user_model().objects.get(email=request.POST['email'])
 
-        user.user_name = request.POST['user_name']
+        user.user_name = request.POST['email']
         user.set_password(request.POST['password'])
         user.save(using=self._db)
         return user
+
+    
+    # def delete_user(self, email):
+    #     user = get_user_model().objects.get(email)
+    #     return user
 
 
 class UserAuth(object):
@@ -80,6 +95,7 @@ class User(AbstractBaseUser):
     reg_date = models.DateTimeField(blank=True, null=True)
     user_name = models.CharField(max_length=100, null=True)
     is_active = models.IntegerField(blank=True, null=True)
+    balance = models.IntegerField(default=50000000, editable=True)
     objects = UserManager()
 
     USERNAME_FIELD = 'email'

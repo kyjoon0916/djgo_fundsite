@@ -10,51 +10,34 @@ function hidePassword(id){
 }
 
 function checkEmail(csrf_token){
-    if($("#emailaddress").val().trim() == '') {
-      alert("이메일을 입력하십시오.");
-      return false;
-    }else {
-      $.ajax({
-        type: "POST",
-        url: "account/check_email",
-        data: {'email': $("#emailaddress").val().trim(), 'csrfmiddlewaretoken': csrf_token},  // 서버로 데이터 전송시 옵션
-        dataType: "json", 
-        success: function(response){ 
-          if (response.result != 'ok') {
-            alert(response.msg);
-          } else {
-            console.log("ok");
-            // show alert div whether sended
-          }
-        },
-        error: function(request, status, error){
-          alert("오류가 발생했습니다. 다시 시도해 주십시오.");
-          location.reload();
-        },
-      });
-    }
+  var emailAddress = $("#emailaddress").val().trim()
+  if(emailAddress == '') {
+    alert("이메일을 입력하십시오.");
+    return false;
+  }
+  else {
+    $.ajax({
+      type: "POST",
+      url: "account/check_email",
+      data: {'email': emailAddress, 'csrfmiddlewaretoken': csrf_token},  // 서버로 데이터 전송시 옵션
+      dataType: "json", 
+      success: function(response){ 
+        if (response.result != 'ok') {
+          alert(response.msg);
+        } else {
+          console.log("ok");
+          
+          $("#email_guide").text('인증메일이 ' + emailAddress + ' (으)로 전송되었습니다.\r\n받으신 이메일을 열어 링크를 클릭하시면 인증이 완료됩니다.')
+          
+        }
+      },
+      error: function(request, status, error){
+        alert("오류가 발생했습니다. 다시 시도해 주십시오.");
+        location.reload();
+      },
+    });
+  }
 }
-// 이메일 인증 확인(완료 버튼)
-$("#completeButton").click(function(){
-  $.ajax({
-    type: "GET",
-    url: "{% url 'check_certification' %}", 
-    data: {'email':  $("#emailaddress").val().trim()},
-    success: function(confirm){ 
-      if(confirm == '0') {
-        alert("이메일 인증을 완료한 뒤 다시 시도해 주십시오.");
-        // show alert div instead of errormodal
-      }else{
-        console.log('Email validation passed');
-      }
-    },
-    error: function(request, status, error){
-      alert("오류가 발생했습니다. 다시 시도해 주십시오.");
-      location.reload();
-    },
-  });
-  return false;
-});
 $("#signup-password-f").click(function(){
   console.log("password input clicked");
   $("#password_guide").css("display", "block")
@@ -73,16 +56,12 @@ $(".pwcheck").on('input', function(){
   var num = pw.search(/[0-9]/g);
   var eng = pw.search(/[a-z]/ig);
   var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
-  var test = pw.search(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/);
-  console.log('test=',test)
-  console.log('pw.search(/\s/) != -1',pw.search(/\s/) != -1);
-  console.log('num < 0 && eng < 0',num < 0 && eng < 0);
-  console.log('eng < 0 && spe < 0',eng < 0 && spe < 0);
-  console.log('spe < 0 && num < 0',spe < 0 && num < 0);
+
   if(pw.length < 8 || pw.length > 12){
     $("#pw_txt1").removeClass('good')
     $("#pw_txt1").addClass('bad')
-  }else{
+  }
+  else{
     $("#pw_txt1").removeClass('bad')
     $("#pw_txt1").addClass('good')
   }
@@ -113,17 +92,63 @@ $(".pwcheck").on('input', function(){
   }
 });
 
-function frmCheck(){
+function frmCheck(url, csrf_token){
+  console.log('frmCheck invoked')
   let flag = true;
-
-  $('input').each(function(){
-    if ($(this).val() == '') {
-      alert("필수 정보를 입력하십시오.")
-      flag = false;
-      $(this).focus();
+  $.ajax({
+    type: "POST",
+    url: url, 
+    data: {'email':  $("#emailaddress").val().trim(), 'csrfmiddlewaretoken': csrf_token},
+    async: false,
+    success: function(confirm){ 
+      if(typeof(confirm) === 'string' && (confirm != 0 && confirm != 1)){
+        alert(confirm)
+        flag = false;
+        return flag;
+      }
+      else if(confirm == 0) {
+        alert("이메일 인증을 완료한 뒤 다시 시도해 주십시오.");
+        flag = false;
+        return flag;
+      }
+      else{
+        console.log('Email validation passed');
+      }
+    },
+    error: function(request, status, error){
+      alert("오류가 발생했습니다. 다시 시도해 주십시오.");
+      console.log(error)
+      // location.reload();
+    },
+  });
+  if(flag == false){
+    return flag;
+  }
+  var pw = $("#signup-password-f").val();
+  if((pw.length >= 8 && pw.length <= 12) && pw.search(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/) != -1){
+    console.log('valid password');
+    if($("#signup-password-f").val() == $("#signup-password-s").val()){
+      console.log("valid conf-password");
     }
-  })
-
-  if(flag) $("#regist_frm").submit();
-  else return flag;
+    else{
+      alert("비밀번호 확인란을 정확히 입력해주세요.")
+      flag = false;
+      return flag;
+    }
+  }
+  else{
+    alert("비밀번호를 정확히 입력해주세요.");
+    flag = false;
+    return flag;
+  }
+  if(document.getElementById('termCheckBox').checked){
+    console.log('term box is checked')
+  }
+  else{
+    alert("개인정보 이용약관에 동의해주세요.");
+    flag = false;
+    return flag;
+  }
+  alert($("#emailaddress").val().trim() + "님의 회원가입이 완료 되었습니다.\n로그인페이지로 이동하여 회원접속 후 이용가능합니다.");
+  $("#regist_frm").submit();
 }

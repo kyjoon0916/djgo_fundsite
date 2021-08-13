@@ -143,6 +143,18 @@ LOGOUT_REDIRECT_URL = '/'
 
 SESSION_COOKIE_AGE = 900
 # 432000   24시간
+# Set User model 
+AUTH_USER_MODEL = 'account.User'
+AUTHENTICATION_BACKENDS = ('account.models.UserAuth')
+
+SITE_ID = 1
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_UNIQUE_EMAIL = True
 
 # E-mail sending system setting (gmail)
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

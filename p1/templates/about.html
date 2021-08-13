@@ -71,13 +71,18 @@
         <div class="modal-body">
           {% if user.is_authenticated %}
           <span>{{user.username}} 내 보유 포인트 {{user.balance}}</span>
-          <form>
-            <div class="form-group" method="POST">
+          <form action="/funding" method="POST">
+            <div class="capital">
               <label for="capital">후원 금액</label>
-              <input type="number" class="form-control" id="funding" name="funding" placeholder="금액을 입력하시오." value="{{ form.funding.value|default_if_none:'' }}">
+              <input type="submit" class="form-control" id="funding" name="funding" placeholder="금액을 입력하시오." value="ok">
               <button type="submit" class="btn btn-secondary" data-dismiss="modal" style="margin: 1%;">후원</button>
             </div>
           </form>
+          <form action="/team_name_url/" method="post">
+            <label for="team_name">Enter name: </label>
+            <input id="team_name" type="text" name="name_field" value="Default name for team.">
+            <input type="submit" value="OK">
+        </form>
           {% else %}
           <div class="alert alert-Info">
             <strong>회원정보 없음&nbsp;&nbsp;</strong><a href="/" class="alert-link">로그인</a><a>&nbsp;&nbsp; 이후에 시도하십시오.</a>

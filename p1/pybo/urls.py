@@ -3,9 +3,10 @@ from django.conf.urls import url
 from . import views
 from django.conf.urls.static import static
 from django.conf import settings
+
 urlpatterns = [
     path('', views.index),
     path('about', views.about, name='about'),
     path('about/<int:id>/', views.aboutDetail, name='about_detail'),
-    
+    path('about/<int:id>/fundingupdate', views.fundingupdate, name='fundingupdate'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

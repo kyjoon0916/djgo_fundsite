@@ -10,7 +10,7 @@ from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views import generic
 from django.db.models import Sum
-
+from django.http import HttpResponseRedirect
 # class aboutDetail(generic.View):
 #     def __init__(self):
 #         self.template_name = "about.html"
@@ -31,9 +31,14 @@ from django.db.models import Sum
 #         "descript":self.descript,"titme_nm":self.title_nm,"ogImgUrl":self.ogImgUrl}
 
 #         return render(request, self.template_name, self.content)
-def funding_update(request):
-    queryset = Funding.objects.all()
-    queryset.update(title='test title') # 일괄 update 요청
+def fundingupdate(request, id):
+    if request.method == "POST":
+        point = request.POST['funding']
+        update = Funding(funding=point, funding_id=id)
+        update.save()
+        return HttpResponseRedirect('/about.html')
+        # queryset = Funding.objects.all()
+        # queryset.update(title='') # 일괄 update 요청
 
 def aboutDetail(request, id):
     writing = Writing.objects.get(pk=id)

@@ -11,10 +11,10 @@ from django.db import models
 class Funding(models.Model):
     id = models.BigAutoField(primary_key=True)
     funding = models.PositiveIntegerField()
-    pub_date = models.DateTimeField()
-    funding_0 = models.ForeignKey('AuthUser', models.DO_NOTHING, db_column='funding_id')  # Field renamed because of name conflict.
-    writing = models.ForeignKey('Writing', models.DO_NOTHING)
-
+    pub_date = models.DateTimeField(auto_now_add=True)
+    funding_id = models.ForeignKey('AuthUser', models.DO_NOTHING, db_column='funding_id')  # Field renamed because of name conflict.
+    writing_id = models.ForeignKey('Writing', models.DO_NOTHING)
+    
     class Meta:
         managed = False
         db_table = 'Funding'

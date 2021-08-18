@@ -1,3 +1,37 @@
+$('#signupModal').on('hidden', function() {
+  console.log('modal hide.')
+  $(this).data('modal').$element.removeData();
+})
+
+function loginCheck(url, csrf_token){
+  var emailAddress = $("#login-email").val().trim()
+  if(emailAddress == '') {
+    alert("아이디를 입력하십시오.");
+    return false;
+  }
+  var password = $("#login-password").val().trim()
+  if(password == '') {
+    alert("비밀번호를 입력하십시오.");
+    return false;
+  }
+  $.ajax({
+    type: "POST",
+    // todo --> url --> get from parameter
+    url: url,
+    data: {'email': emailAddress, 'password': password,'csrfmiddlewaretoken': csrf_token},  // 서버로 데이터 전송시 옵션
+    dataType: "json",
+    success: function(response){
+      if(response.result != 'ok') {
+        alert(response.msg);
+      }
+      else {
+        console.log("ok");
+        console.log("success login");
+        location.reload();
+      }
+    }
+  })
+}
 
 function showPassword(id){
   var password = document.getElementById(id);
@@ -9,7 +43,7 @@ function hidePassword(id){
   password.type = "password";
 }
 
-function checkEmail(csrf_token){
+function checkEmail(url, csrf_token){
   var emailAddress = $("#emailaddress").val().trim()
   if(emailAddress == '') {
     alert("이메일을 입력하십시오.");
@@ -18,7 +52,7 @@ function checkEmail(csrf_token){
   else {
     $.ajax({
       type: "POST",
-      url: "account/check_email",
+      url: url,
       data: {'email': emailAddress, 'csrfmiddlewaretoken': csrf_token},  // 서버로 데이터 전송시 옵션
       dataType: "json", 
       success: function(response){ 
@@ -26,8 +60,8 @@ function checkEmail(csrf_token){
           alert(response.msg);
         } else {
           console.log("ok");
-          
-          $("#email_guide").text('인증메일이 ' + emailAddress + ' (으)로 전송되었습니다.\r\n받으신 이메일을 열어 링크를 클릭하시면 인증이 완료됩니다.')
+          $("#email_guide").css("display", "block");
+          $("#email_guide").text('인증메일이 ' + emailAddress + ' (으)로 전송되었습니다.받으신 이메일을 열어 링크를 클릭하시면 인증이 완료됩니다.');
           
         }
       },
@@ -75,7 +109,8 @@ $(".pwcheck").on('input', function(){
   //   $("#pw_txt2").removeClass('bad')
   //   $("#pw_txt2").addClass('good')
   // }
-  if(pw.search(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/) == -1){
+  // Todo --> 조건 에외 체크
+  if(pw.search(/^(?=.*?[A-Za-z])(?=.*?[0-9])/) == -1){
     $("#pw_txt2").removeClass('good')
     $("#pw_txt2").addClass('bad')
   }

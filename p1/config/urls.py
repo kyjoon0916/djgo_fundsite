@@ -17,10 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 from pybo import views
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('common/', include('common.urls')),
+    path('admin/', admin.site.urls),  # url에서 ``/``필수
     path('account/', include('account.urls')),
-    path('pybo/', include('pybo.urls')),
-    path('about/', views.about, name="about"),
-    path('', views.index, name='index'),
+    path('', include('pybo.urls')),
+    # path('about/', views.about, name="about"),
+    # path('', views.index, name='index'),
 ]

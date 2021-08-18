@@ -9,9 +9,11 @@ from account.models import User
 
 
 def index(request):
-    # print('invoke pybo.index')
-    # User.objects.filter(email='jyh@smartinside.ai').update(balance='456465')
-
+    print('invoke pybo.index')
+    # User.objects.delete_user(email='jyh@smartinside.ai')
+    print(request.session)
+    print('request.user',request.user)
+    user = request.session.get('user')
     writing_list = Writing.objects.order_by('pub_date') 
     page = request.GET.get('page', 1)
     paginator = Paginator(writing_list, 3)
@@ -19,13 +21,9 @@ def index(request):
     return render(request, 'index.html', {'writings': writings,})
 
 
-def item_detail(request, id):
+def about(request, id):
     writing = Writing.objects.get(pk=id)
-    return render(request, 'item_detail.html', {'writing': writing,})
-
-
-def about(request):
-    return render(request, 'about.html')
+    return render(request, 'about.html', {'writing': writing})
 
 
 # def home(request):

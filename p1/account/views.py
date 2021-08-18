@@ -1,9 +1,8 @@
 from datetime import datetime
-from django.http import HttpResponse, JsonResponse
-from account.models import User
-from account.models import UserAuth
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from account.models import User, UserAuth
+from django.contrib.auth import login, logout
 from django.shortcuts import redirect, render
-import os
 # SMTP 관련 인증
 from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
@@ -15,8 +14,51 @@ from account.tokens import account_activation_token
 
 def index(request):
     print('invoke account.views.index')
-
+    print(request)
+    print('request.user',request.user)
+    user = request.session.get('user')
     return render(request, 'index.html',)
+
+"""
+--> login
+* base_user.py --> set_unusable_password()
+1. Compare password with db and return results
+    1-0. user.is_authenticated --> return always True --> 
+    whether ``user`` is None or not --> Only need to set ``user`` and return that named user
+    1-1. set_password --> 
+2. If equal, set session and persist authentication
+
+--> logout
+1. remove session
+"""
+def login_view(request):
+    response_data = {}
+    
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+
+        user = UserAuth().authenticate(email=email, password=password)
+
+        if user is not None:
+            print('user is', user)
+            response_data['result'] = 'ok'
+            # Todo --> set session with django built-in function
+            # request.session['user'] = user.email
+            login(request, user)
+            user.last_login = datetime.today().strftime('%Y-%m-%d') +' '+ datetime.today().strftime('%H:%M:%S')
+            user.save()
+            return JsonResponse(response_data)
+        else:
+            print('user is None')
+            response_data['result'] = 'error'
+            response_data['msg'] = '아이디와 비밀번호를 확인해주세요.'
+            return JsonResponse(response_data)
+    # return redirect(request.META.get('HTTP_REFERER', 'index.html'))
+
+def logout_view(request):
+    logout(request)
+    return redirect(request.META.get('HTTP_REFERER', 'index.html'))
 
 
 def get_user_info(request):
@@ -53,7 +95,7 @@ def check_email(request):
 
 
 def register_confirmEmail(request, response_data):
-    user = User.objects.create_user(request)
+    user = User.objects.create_user(email=request.POST['email'])
 
     message = render_to_string('account/activation_email.html', {
         'domain': request.get_host(),

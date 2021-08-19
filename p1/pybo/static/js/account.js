@@ -1,3 +1,10 @@
+function loginToSignup() {
+  $('#loginClose').click();
+  $('#signup').click();
+  console.log('signup.click is finished')
+  return 0;
+}
+
 $('#signupModal').on('hidden', function() {
   console.log('modal hide.')
   $(this).data('modal').$element.removeData();

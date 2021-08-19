@@ -27,23 +27,23 @@
           style="color: inherit; font-family: '나눔스퀘어Regula';">
           <img src="{% static 'img/main page_middle bar_icon001.png' %}">  {{ user.email }} (로그아웃)</a></span>
       {% else %}
-      <span class="nav-item"><a class="nav-link" href="#" data-toggle="modal" data-target="#loginModal"
+      <span class="nav-item"><a class="nav-link" id="login" href="#" data-toggle="modal" data-target="#loginModal"
           style="color: inherit; font-family: '나눔스퀘어Regula';">
           <img src="{% static 'img/main page_middle bar_icon001.png' %}"> 로그인</a></span>
 
       {% endif %}
-      <span class="nav-item"><a class="nav-link" href="#" data-toggle="modal" data-target="#signupModal"
+      <span class="nav-item"><a class="nav-link" id="signup" href="#" data-toggle="modal" data-target="#signupModal"
           style="color: inherit; font-family: '나눔스퀘어Regula';">
           <img src="{% static 'img/main page_middle bar_icon002.png' %}"> 회원가입</a></span>
     </div>
   </div>
   <!-- The Modal -->
-  <div class="modal fade" id="loginModal">
+  <div class="modal fade show" id="loginModal">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <!-- Modal Header -->
         <div class="modal-header no-bg">
-          <button type="button" class="close" data-dismiss="modal"><img src="{% static 'img/x GUI_210809.png' %}" style="width: 80%"></button>
+          <button type="button" class="close" data-dismiss="modal"><img id="loginClose" src="{% static 'img/x GUI_210809.png' %}" style="width: 80%"></button>
         </div>
         <!-- Modal body -->
         <div class="modal-body">
@@ -82,9 +82,9 @@
                       <div class="row">
                         <div class="col-12 text-center" style="font-weight: 500">
                           <!-- 수정사항: 회원가입 모달 띄우기 -->
-                          <span><a href="{% url 'index' %}" style="text-decoration: none; color: #212529;">회원가입</a></span>
+                          <span><a onClick="loginToSignup()" style="text-decoration: none; cursor: pointer; color: #212529;">회원가입</a></span>
                           <span class="px-3">&#124;</span>
-                          <span>ID/PW 찾기</span>
+                          <span><a href="#" style="text-decoration: none; color: #212529;">ID/PW 찾기</a></span>
                         </div>
                       </div>
                     </div>
@@ -105,7 +105,7 @@
     <div class="modal-content">
       <!-- Modal Header -->
       <div class="modal-header no-bg">
-        <button type="button" class="close" data-dismiss="modal"><img src="/static/img/x%20GUI_210809.png" style="width: 80%"></button>
+        <button type="button" class="close" data-dismiss="modal"><img id="signupClose" src="/static/img/x%20GUI_210809.png" style="width: 80%"></button>
       </div>
       <!-- Modal body -->
       <div class="modal-body">

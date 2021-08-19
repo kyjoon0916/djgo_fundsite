@@ -1,19 +1,11 @@
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-# from django.db import Writing
-# Create your views here.
-from django.http import HttpResponse
-from .models import Writing
-# from p1.account.models import User
+from django.http import HttpResponse, JsonResponse
+from .models import Writing, FundingLog
 from account.models import User
-
+from datetime import datetime
 
 def index(request):
-    print('invoke pybo.index')
-    # User.objects.delete_user(email='jyh@smartinside.ai')
-    print(request.session)
-    print('request.user',request.user)
-    user = request.session.get('user')
     writing_list = Writing.objects.order_by('pub_date') 
     page = request.GET.get('page', 1)
     paginator = Paginator(writing_list, 3)
@@ -23,8 +15,39 @@ def index(request):
 
 def about(request, id):
     writing = Writing.objects.get(pk=id)
-    return render(request, 'about.html', {'writing': writing})
+    tags = writing.tag.split('/')
+    return render(request, 'about.html', {'writing': writing, 'tags': tags})
 
+
+def fundingupdate(request):
+    response_data = {}
+
+    if request.method == 'POST':
+        response_data['result'] = 'ok'
+        user_id = int(request.POST['user_id'])
+        writing_id = int(request.POST['writing_id'])
+        funding_amount = int(request.POST['funding_amount'])
+        
+        # update user.balance
+        user = User.objects.filter(id=user_id)
+        print('updated balance=',(user.first().balance-funding_amount))
+        user.update(balance=(user.first().balance-funding_amount))
+
+        # update writing.accumulated_amount
+        writing = Writing.objects.filter(id=writing_id)
+        print('updated accumulated_amount=', (writing.first().accumulated_amount + funding_amount))
+        writing.update(accumulated_amount=(writing.first().accumulated_amount + funding_amount))
+
+        # save the funding log
+        funding_log = FundingLog(user_id=User.objects.get(id=user_id), writing_id=Writing.objects.get(id=writing_id), funding_amount=funding_amount, funding_date=datetime.now())
+        funding_log.save()
+        return JsonResponse(response_data)
+    else:
+        response_data['result'] = 'error'
+        return JsonResponse(response_data)
+
+    
+    return None
 
 # def home(request):
 #     numbers_list = range(1, 1000)

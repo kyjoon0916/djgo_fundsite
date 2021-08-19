@@ -7,8 +7,6 @@ from datetime import datetime
 from account.models import User
 
 
-
-
 class Writing(models.Model):
     title = models.CharField(max_length=64,verbose_name="제목")
     contents = models.TextField(verbose_name="내용")
@@ -28,7 +26,6 @@ class Writing(models.Model):
 
 
 class FundingLog(models.Model):
-    funding_id = models.BigIntegerField(blank=True, null=False, primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column='user_id')
     writing_id = models.ForeignKey(Writing, on_delete=models.CASCADE, db_column='writing_id')
     funding_amount = models.IntegerField(null=True)

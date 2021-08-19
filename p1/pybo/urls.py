@@ -6,4 +6,5 @@ from django.conf import settings
 urlpatterns = [
     path('', views.index, name='index'),
     path('about/<int:id>', views.about, name='about'),
+    path('fundingupdate/', views.fundingupdate, name='fundingupdate'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

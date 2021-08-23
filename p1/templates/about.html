@@ -20,19 +20,69 @@
   <link
     href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
     rel="stylesheet" type="text/css" />
+  <style>
+    @media (min-width: 992px){
+      .a-wrapper {
+        margin-left: 5rem;
+        margin-top: 0px !important; 
+      }
+   }
+   @media (min-width: 992px){
+     .mt-ac {
+       margin-top: 0.25%
+     }
+   }
+   @media (min-width: 1100px){
+     .mt-ac {
+       margin-top: 0.5%
+     }
+   }
+   @media (min-width: 1200px){
+     .mt-ac {
+       margin-top: 1%
+     }
+   }
+   @media (min-width: 1300px){
+     .mt-ac {
+       margin-top: 2%
+     }
+   }
+   @media (min-width: 1400px){
+     .mt-ac {
+       margin-top: 3%
+     }
+   }
+   @media (min-width: 1500px){
+     .mt-ac {
+       margin-top: 4%
+     }
+   }
+   @media (min-width: 1600px){
+     .mt-ac {
+       margin-top: 5%
+     }
+   }
+   @media (min-width: 1700px){
+     .mt-ac {
+       margin-top: 7%
+     }
+    }
+
+  </style>
 </head>
 <body>
   {% include "navbar.html" %}
-  <div class="row">
-    <div class="col-1"></div>
-    <div class="col-10">
-      <div class="container-fluid my-4 pt-3">
-        <div class="row">
-
-          <div class="col-6 ">
-            <img src="../static/img/{{ writing.img_file_name }}" alt="">
+  <div class="container-fluid container-wrapper">
+    <div class="container-fluid my-4 pt-3">
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="img-frame p-2">
+            <!-- <img src="../static/img/{{ writing.img_file_name }}" alt=""> -->
+            <img src="../static/img/main page_image.jpg">
           </div>
-          <div class="col-6">
+        </div>
+        <div class="col-lg-6">
+          <div class="container mt-4 a-wrapper">
             <p style="font-size: 200%;">{{ writing.title }}</p>
             <div class="progress" style="width: 100%; height: 5px;">
               <div class="progress-bar" style="width:8rem; background-color: #67E5C1;"></div>
@@ -43,92 +93,76 @@
               {{ tag }}
             </span>
             {% endfor %}
-            <div class="row funding-info" style="flex-direction: column;">
-            <b class="text" style="display: block; font-size: 100%;"><strong id="accumulatedAmount" style="font-size: 200%;"> {{ writing.accumulated_amount }}</strong> 원 펀딩</b>
-            <b class="text" style="display: block; font-size: 100%;">현재 <string style="font-size: 200%;">34</string> 명의 서포트</b>
+            <div class="funding-info" style="flex-direction: column;">
+            <b class="text mt-ac" style="display: block; font-size: 100%;"><strong id="accumulatedAmount" style="font-size: 200%;"> {{accumulated_amount }}</strong> 원 펀딩</b>
+            <b class="text mt-ac" style="display: block; font-size: 100%;">현재 <string style="font-size: 200%;">34</string> 명의 서포트</b>
             </div>
-            <button type="button" class="btn btn-primary btn-lg" id="fundingButton">펀딩하기</button>
-            
-            <div class="row"><b>&nbsp;</b></div>
-            {% if user.is_authenticated %}
-            <form method="POST">
-              {% csrf_token %}
-              <div class="point">
-                <label for="point">후원 금액</label>
-                <input id="point" type="number" class="form-control" name="point" placeholder="금액을 입력하시오.">
-                <button type="button" onClick="fundingUpdate('{% url 'fundingupdate' %}', {{ user.id }}, {{ writing.id }},{{ user.balance }}, '{{ csrf_token }}')" 
-                style="background-color: #67E5C1;" class="btn btn-secondary" data-dismiss="modal" style="margin: 1%;">후원</button>
-              </div>
-            </form>
-            {% else %}
-            <div class="alert alert-Info">
-              <strong>회원정보 없음&nbsp;&nbsp;</strong><a href="/" class="alert-link">로그인</a><a>&nbsp;&nbsp; 이후에 시도하십시오.</a>
+            <button type="button" class="btn btn-primary btn-lg mt-ac" id="fundingButton" style="background-color: #67D6E8; border-color: unset;"
+            data-toggle="modal" data-target="#fundingModal">펀딩하기</button>
+            <!-- {% if user.is_authenticated %}
+          <form method="POST">
+            {% csrf_token %}
+            <div class="point">
+              <label for="point">후원 금액</label>
+              <input id="point" type="number" class="form-control" name="point" placeholder="금액을 입력하시오.">
+              <button type="button" onClick="fundingUpdate('{% url 'fundingupdate' %}', {{ user.id }}, {{ writing.id }},{{ user.balance }}, '{{ csrf_token }}')" 
+              style="background-color: #67E5C1;" class="btn btn-secondary" data-dismiss="modal" style="margin: 1%;">후원</button>
             </div>
-            {% endif %}
+          </form>
+          {% else %}
+          <div class="alert alert-Info">
+            <strong>회원정보 없음&nbsp;&nbsp;</strong><a href="/" class="alert-link">로그인</a><a>&nbsp;&nbsp; 이후에 시도하십시오.</a>
+          </div>
+          {% endif %} -->
           </div>
         </div>
-        <div class="modal fade" id="fundingModal" role="dialog">
-          <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-              <!-- Modal Header -->
-              <div class="modal-header">
-                <h4 class="modal-title">후원하기</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-              </div>
-              <!-- Modal body -->
-              <div class="modal-body">
-                {% if user.is_authenticated %}
-                <span>{{user.email}} 보유 포인트 {{user.balance}}</span>
-                <form action="pybo/fundingupdate" method="POST">
-                  {% csrf_token %}
-                  <div class="funding">
-                    <label for="funding">후원 금액</label>
-                    <input id="funding" type="number" class="form-control" name="funding" placeholder="금액을 입력하시오.">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-secondary" data-dismiss="modal"
-                      style="margin: 3%;">후원</button>
-                  </div>
-                </form>
-                {% else %}
-                <div class="alert alert-Info">
-                  <strong>회원정보 없음&nbsp;&nbsp;</strong><a href="/" class="alert-link">로그인</a><a>&nbsp;&nbsp; 이후에
-                    시도하십시오.</a>
+      </div>
+      <div class="modal fade" id="fundingModal" role="dialog">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">후원하기</h4>
+              <button type="button" class="close" id="fundingClose" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+              {% if user.is_authenticated %}
+              <span>{{user.email}} 보유 포인트 <span id='user_balance'>{{user.balance}}</span></span>
+              <form method="POST">
+                {% csrf_token %}
+                <div class="funding">
+                  <label for="funding">후원 금액</label>
+                  <input id="point" type="number" class="form-control" name="point" placeholder="금액을 입력하시오.">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" onClick="fundingUpdate('{% url 'fundingupdate' %}', {{ user.id }}, {{ writing.id }},{{ user.balance }}, '{{ csrf_token }}')"
+                    style="margin: 3%;">후원</button>
                 </div>
-                {% endif %}
+              </form>
+              {% else %}
+              <div class="alert alert-Info">
+                <strong>회원정보 없음&nbsp;&nbsp;</strong><a class="alert-link" onClick="modalConnect('#fundingClose', '#login')" style="display: inline; cursor: pointer;">로그인</a><p style="display: inline;"> 이후에
+                  시도하십시오.</p>
               </div>
-              <!-- Modal footer -->
-              <div class="modal-footer">
-              </div>
+              {% endif %}
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
             </div>
           </div>
         </div>
-        <div class="container-fluid">
-          <div class="row"><p></p></div>
-          <div class="row pt-5 my-4 px-0">
-            <div class="col-12" style="margin-left: -15px; margin-right: -15px;">
-              <div class="contatiner" style="background-color:#c7cdd1; width: 100%; border: 2pt solid beige;">
-                <p style="margin: 1%; font-size: 25pt ;">[{{ writing.title }}]</p>
-                <p style="margin-left: 1%; font-size: 20pt;">{{ writing.pub_date }}</p>
-                <p>&nbsp;</p>
-                <div class="container">
-                  <div class="row">
-                  </div>
-                </div>
-                <div class="container-fluid">
-                  <div class="row">
-                    <div class="col"
-                      style="background-color: aliceblue; padding: 1% 1% 5% 1%; margin: -3% 1% 1% 1%; border: beige solid;">
-                      {{ writing.contents }}
-                      <!-- <p>1. 보행 안전</p>
-                <p>1)우회전 차량의 보행자 위협</p>
-                <p>2) 불법 주/정차 차량에 의한 교통 체증</p>
-                <p>3) 교통량을 감안하지 않는 일방적인 신호 체계</p>
-                <p>2. 해당 위치/지역 등 사세 정보</p>
-                <p>- 새솔동 전 지역</p>
-                <p>3. 해결 아이디어</p>
-                <p>- 실 통행량을 감지하여 신호가 자동으로 바뀌는 센서형 신호등 도입</p> -->
-                    </div>
-                  </div>
+      </div>
+      <div class="row pt-5 my-4 px-0">
+        <div class="col-12">
+          <div class="writing" style="background-color:#c7cdd1; width: 100%; border: 2pt solid beige;">
+            <p style="margin: 1%; font-size: 25pt ;">[{{ writing.title }}]</p>
+            <p style="margin-left: 1%; font-size: 20pt;">{{ writing.pub_date }}</p>
+            <p>&nbsp;</p>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col"
+                  style="background-color: aliceblue; padding: 1% 1% 5% 1%; margin: -3% 1% 1% 1%; border: beige solid;">
+                  {{ writing.contents }}
                 </div>
               </div>
             </div>
@@ -137,7 +171,8 @@
       </div>
     </div>
   </div>
-  <div class="col-1"></div>
+
+
   {% include "footer.html" %}
   <script src="/static/js/jquery-3.6.0.js"></script>
   <script src="{% static 'js/bootstrap.js' %}"></script>
@@ -146,6 +181,7 @@
   <script src="{% static 'js/account.js' %}"></script>
   <script>
     function fundingUpdate(url, userID, writingID, balance, csrf_token){
+      console.log("fundingUpdate is invoked")
       var userBalance = balance;
       if ($("#point").val().trim() == '') {
         alert('후원 금액을 입력해주세요.');
@@ -166,10 +202,11 @@
             return false;
           }
           else {
-            var accumulatedAmount = Number($("#accumulatedAmount").text());
+            var accumulatedAmount = Number($("#accumulatedAmount").text().replace(/\D/g,''));
             console.log(accumulatedAmount + point);
-            $("#accumulatedAmount").html(accumulatedAmount + point)
+            $("#accumulatedAmount").html((accumulatedAmount + point).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
             alert(`${point}원 후원 되었습니다.`)
+            location.reload();
           }
         },
         error: function(request, status, error){

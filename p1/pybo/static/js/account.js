@@ -1,6 +1,6 @@
-function loginToSignup() {
-  $('#loginClose').click();
-  $('#signup').click();
+function modalConnect(modal_1, modal_2) {
+  $(modal_1).click();
+  $(modal_2).click();
   console.log('signup.click is finished')
   return 0;
 }

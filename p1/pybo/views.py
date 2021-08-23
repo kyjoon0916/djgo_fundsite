@@ -16,7 +16,9 @@ def index(request):
 def about(request, id):
     writing = Writing.objects.get(pk=id)
     tags = writing.tag.split('/')
-    return render(request, 'about.html', {'writing': writing, 'tags': tags})
+    amount = writing.accumulated_amount
+    accumulated_amount = f'{amount:,}'
+    return render(request, 'about.html', {'writing': writing, 'tags': tags, 'accumulated_amount': accumulated_amount})
 
 
 def fundingupdate(request):

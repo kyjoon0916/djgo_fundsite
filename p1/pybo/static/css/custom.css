@@ -137,3 +137,7 @@ display: inline-block;
     padding-left: 9rem;
     padding-right: 9rem;
 }
+.img-thumnail {
+    max-width: 100% !important;
+    max-height: 100% !important;
+}

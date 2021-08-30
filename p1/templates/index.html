@@ -55,7 +55,7 @@
   <!-- Board -->
   {% include "board.html" %}
   <!-- Divider-->
-  <div class="container" style="max-width: 1750px!important;"">
+  <div class="container" style="max-width: 1750px!important;">
     <div class="row infinite-container">
       {% for writing in writings %}
       <div class="col-md-4 infinite-item">
@@ -64,7 +64,7 @@
             <sup>{{ writing.tag }}</sup>
           </div>
           <a href="{% url 'about'  writing.id %}" style="text-decoration: none;">
-            <img class="img-thumbnail" src="static/img/{{ writing.img_file_name }}" style="border: none; height: 240px; min-width: 550px;"/>
+            <img class="img-thumbnail" src="static/img/{{ writing.img_file_name }}" style="border: none; height: 240px; max-width: 100% !important;"/>
             <div class="card-body text-center" style="padding: 0.5rem;">
               <h5 style="color: #262626; font-family: '나눔스퀘어Bold';">{{ writing.title }}</h5>
             </div>
